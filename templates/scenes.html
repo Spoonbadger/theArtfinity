@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Cities
+{% endblock %}
+
+{% block main %}
+    Choose your art scene
+<!-- A-Z list of cities - start with the US then go worldwide 
+when you click on a city it takes you to a random selection of art from that city -->
+<div style="text-align: right; padding-right: 100px">
+    <input> <!-- Search bar here-->
+    <button class="btn btn-light" type="search">Search</button>
+</div>
+<div class="art-index">
+    <div class="index-filter">
+        <li letter="A">A</li>
+        <li letter="B">B</li>
+        <li letter="C">C</li>
+        <li letter="D">D</li>
+        <li letter="E">E</li>
+        <li letter="F">F</li>
+        <li letter="G">G</li>
+        <li letter="H">H</li>
+        <li letter="I">I</li>
+        <li letter="J">J</li>
+        <li letter="K">K</li>
+        <li letter="L">L</li>
+        <li letter="M">M</li>
+        <li letter="N">N</li>
+        <li letter="O">O</li>
+        <li letter="P">P</li>
+        <li letter="Q">Q</li>
+        <li letter="R">R</li>
+        <li letter="S">S</li>
+        <li letter="T">T</li>
+        <li letter="U">U</li>
+        <li letter="V">V</li>
+        <li letter="W">W</li>
+        <li letter="X">X</li>
+        <li letter="Y">Y</li>
+        <li letter="Z">Z</li>
+        <li letter="all">View All</li>
+    </div>
+</div>
+
+
+<div class="container mt-5">
+    <h2>City Art Scenes</h2>
+    <div class="row">
+        {% for scene in scenes %}
+        <div class="col-md-4 mb-4">
+        <div class="art-card card">
+            <img src="{{ url_for('static', filename=scene.scene_city_picture) }}" class="card-img-top" alt="{{ scene.scene_city_name }}">
+            <div class="card-body">
+            <h5 class="card-title">{{ scene.scene_city_name }}</h5>
+            <p class="card-text">{{ scene.scene_city_description }}</p>
+            <!-- Optionally, you can include other details like artist name, price, etc. -->
+            <a href="{{ url_for('scene_art', scene_id=scene.scene_id) }}" class="btn btn-primary">View Art</a>
+            </div>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

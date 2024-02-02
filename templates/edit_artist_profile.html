@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    edit artist profile
+{% endblock %}
+
+{% block main %}
+    <div class="mb-5">
+        <h6 class="main-heading">
+            Let's edit your artist profile.
+        </h6>
+    </div>
+
+    <div class="mb-5 profile-container">
+        <div class="container-column-third">
+            <div class="profile-image">
+                <img src="IMAGES/artists/generic-artist-profile-picture.png">
+                <div class="add-picture-overlay">
+                    <label for="profile-picture-input" class="upload-label">Click to add profile picture</label>
+                    <input type="file" id="profile-picture-input" accept="image/*" style="display: none;">
+                </div>
+            </div>
+            <div>
+
+            </div>
+        </div>
+        <script>
+            // Get reference to the file input element
+            var fileInput = document.getElementById("profile-picture-input");
+
+            // Add event listener to file input element
+            fileInput.addEventListener('change', function(event) {
+                var file = event.target.files[0];
+                var img = document.getElementById('profile-image');
+
+                // Create a fileReader object
+                var reader = new FileReader();
+
+                // Define onload event handlers
+                reader.onload = function(e) {
+                    img.src = e.target.result;
+                };
+
+                reader.readAsDataURL(file);
+            });
+        </script>
+
+        <div class="bio-and-links column-two-thirds">
+            <form class="row g-3">
+                <div class="col-md-4">
+                    <label for="validationDefault01" class="form-label">Artist name</label>
+                    <input type="text" class="form-control" id="validationDefault01" placeholder="Pablo Basquiat" required>
+                </div>
+
+                <div>
+                    <div class="col-md-4">
+                        <label for="validationDefault03" class="form-label">City</label>
+                        <input type="text" class="form-control" id="validationDefault02" required>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="city" class="form-label">City</label>
+                    <select class="form-select" id="city" name="city" required>
+                        <option value="" disabled selected>Choose...</option>
+                        {% for city_code in city_options %}
+                            <option value="{{ city_code }}"{% if user_info[0]['city'] == city_code %}selected{% endif %}>
+                            {{ city_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <div class="col-md-8">
+                        <label for="validationDefault03" class="form-label">Biography</label>
+                        <textarea class="form-control" id="validationDefault03" required rows="6"></textarea>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-8">
+                        <label for="validationDefault03" class="form-label">Genres</label>
+                        <input type="text" class="form-control" id="validationDefault04" required>
+                    </div>
+                </div>
+                <!--
+                <div>
+                    <label for="genres">Genres:</label>
+                    <input type="text" id="genres" onkeyup="showOptions(event)">
+                    <div id="genreOptions"></div>
+                </div> 
+                -->
+                <!-- 
+                <div>
+                    <div class="col-md-8">
+                        <label for="validationDefault03" class="form-label">One sentence biography</label>
+                        <input type="text" class="form-control" id="validationDefault05" required>
+                    </div>
+                </div>
+                -->
+                <div style="padding-bottom: 10px">
+                    <div class="col-md-8">
+                        <label for="validationDefault03" class="form-label">Website link</label>
+                        <input type="text" class="form-control" id="validationDefault06" required>
+                    </div>
+                </div>
+
+                <form class="row g-3 mb-4">
+                    <div class="col-md-5">
+                        <label for="validationDefault06" class="form-label">Social Media Link 1</label>
+                        <input type="text" class="form-control" id="validationDefault07" required>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="validationDefault07" class="form-label">Social Media Link 2</label>
+                        <input type="text" class="form-control" id="validationDefault08" required>
+                    </div>
+                </form>
+                <form class="row g-3 mb-4">
+                    <div class="col-md-5">
+                        <label for="validationDefault08" class="form-label">Social Media Link 3</label>
+                        <input type="text" class="form-control" id="validationDefault09" required>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="validationDefault09" class="form-label">Social Media Link 4</label>
+                        <input type="text" class="form-control" id="validationDefault10" required>
+                    </div>
+                </form>
+        <div class="py-1"></div>
+            <div>
+                <button class="btn btn-primary" type="submit">Update</button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Login 
+{% endblock %}
+
+{% block main %}
+<form action="/login" class="needs-validation" novalidation method="post">
+    <div class="form-floating mb-3">
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="email" name="email" required type="email">
+        <label for="email">Email address</label>
+    </div>
+    <div class="form-floating" mb-3>
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="password" name="password" required type="password">
+        <label for="password">Password</label>
+    </div>
+    <button class="btn btn-primary" type="submit">Login</button>
+</form>
+
+{% endblock %}

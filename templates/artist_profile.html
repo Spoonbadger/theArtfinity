@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    artist profile
+{% endblock %}
+
+{% block main %}
+
+<div class="container-parent">
+    <div class="container-column-third">
+        <div class="profile-image">
+            <img src="/IMAGES/generic-artist-profile-picture.jpg">
+            <div class="add-picture-overlay">
+                <span id="profile-picture-input" name="profile_picture" accept="image/*" style="display: none;"></span>
+            </div>
+        </div>    
+        <div class="container-column-third">
+        </div>
+    </div>
+
+    <div class="column-two-thirds">
+        <form class="row g-5" method="GET">
+            <div>
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <span class="form-control" id="artist_name"  name="artist_name" aria-describedby="inputGroupPrepend2">{{ artist_info.artist_name }}</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-md-5">
+                    <span class="form-control" id="city" name="city">{{ artist_info.city }}</span>
+                </div>
+            </div>
+            <div>
+                <div class="col-md-5">
+                    <span class="form-control" id="country" name="country">{{ artist_info.country }}</span>
+                </div>
+            </div>
+            <div>
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <span class="form-control" id="long_bio"  name="long_bio" aria-describedby="inputGroupPrepend2">{{ artist_info.long_bio }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <span class="form-control" id="email"  name="email" aria-describedby="inputGroupPrepend2">{{ artist_info.email }}</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="py-0"></div>
+
+
+<!-- NEXT IS ADD THE ART BELOW IN ROWS OF FOUR WITH PADDING-->
+<div class="artbox-div">
+    <div class="art-row">
+        <div class="art-col">
+            1c
+        </div>
+        <div class="art-col">
+            2c
+        </div>
+        <div class="art-col">
+            3c
+        </div>
+        <div class="art-col">
+            sfcg
+        </div>
+        <div class="art-col">
+            23c
+        </div>
+        <div class="art-col">
+            fsc
+        </div>
+        <div class="art-col">
+            1c
+        </div>
+        <div class="art-col">
+            2c
+        </div>
+        <div class="art-col">
+            3c
+        </div>
+        <div class="art-col">
+            sfcg
+        </div>
+        <div class="art-col">
+            23c
+        </div>
+        <div class="art-col">
+            fsc
+        </div>
+    </div>
+</div>
+
+{% endblock %}

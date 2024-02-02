@@ -1,0 +1,184 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    profile
+{% endblock %}
+
+{% block main %}
+    <div class="edit-button">
+        <button class="btn btn-light" id="edit_profile" type="button">edit</button>
+    </div>
+
+    <script>
+        document.getElementById("edit_profile").addEventListener("click", function() {
+            window.location.href = "/edit_profile";
+        });
+    
+    </script>
+
+<div class="container-parent">
+    <div class="container-column-third">
+        <div class="profile-image">
+            {% if profile_picture_url %}
+                <img src="{{ url_for('static', filename=profile_picture_url) }}" alt="Profile Picture" class="profile-pic">
+            {% else %}
+                <!-- Display placeholder image if no profile picture is set -->
+                <img src="{{ url_for('static', filename='placeholder-img.jpg') }}" alt="Placeholder Image" class="profile-pic">
+            {% endif %}
+        </div>    
+        <div class="container-column-third">
+        </div>
+    </div>
+
+
+    <div class="column-two-thirds">
+        <form class="row g-5" method="POST">
+            <div>
+                <div class="col-md-5">
+                    <label for="name" class="form-label">First and Last Names: </label>
+                    <span class="form-control" id="first_name" name="first_name" style="border: none;">{{ user_info[0]['first_name'] }}</span>
+                </div>
+                <div class="col-md-5">
+                    <!-- Add style="border: none;" to each span -->
+                    <span class="form-control" id="last_name" name="last_name" >{{ user_info[0]['last_name'] }}</span>
+                </div>
+            </div>
+            <div>
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <span class="form-control" id="artist_name"  name="artist_name" aria-describedby="inputGroupPrepend2">{{ user_info[0]['artist_name'] }}</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-md-5">
+                    <div class="input-group">
+
+                        <span class="form-control" id="scene_city_name" name="scene_city_name">
+                            {{ user_info[0]['scene_city_name'] if user_info and user_info[0]['scene_city_name'] else 'Scene not set' }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <span class="form-control" id="long_bio"  name="long_bio" aria-describedby="inputGroupPrepend2">{{ user_info[0]['long_bio'] }}</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-md-5">
+                    <span class="form-control" id="address_line1" name="address_line1">{{ user_info[0]['address_line1'] }}</span>
+                </div>
+            </div>
+            <div>
+                <div class="col-md-5">
+                    <span class="form-control" id="address_line2" name="address_line2">{{ user_info[0]['address_line2'] }}</span>
+                </div>
+            </div>
+            <div>
+                <div class="col-md-5">
+                    <span class="form-control" id="city" name="city">{{ user_info[0]['city'] }}</span>
+                </div>
+            </div>
+            <div>
+                <div class="col-md-5">
+                    <span class="form-control" id="state" name="state">{{ state_options[user_info[0]['state']] }}</span>
+                </div>
+            </div>
+            <div>
+                <div class="col-md-5">
+                    <!-- <label for="zip" class="form-label">Zip</label> -->
+                    <span class="form-control" id="zip" name="zip">{{ user_info[0]['zip'] }}</span>
+                </div>
+            </div>
+            <div>
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <span class="form-control" id="email"  name="email" aria-describedby="inputGroupPrepend2">{{ user_info[0]['email'] }}</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="py-0"></div>
+
+<div class="container mt-5">
+    <h2>User's Artwork</h2>
+    <div class="row">
+      {% for art in user_artworks %}
+      <div class="col-md-4 mb-4">
+        <div class="art-card card">
+          <img src="{{ url_for('static', filename=art.image_url) }}" class="card-img-top" alt="Art Piece">
+          <div class="card-body">
+            <h5 class="card-title">{{ art.title }}</h5>
+            <p class="card-text">{{ art.description }}</p>
+            <a href="#" onclick="confirmDelete('{{ url_for('delete_art', art_id=art.art_id) }}')" class="btn btn-danger btn-sm">Delete</a>
+          </div>
+
+          <script>
+            function confirmDelete(deleteUrl) {
+                if (confirm("Are you sure you want to delete this art piece?")) {
+                    window.location.href = deleteUrl;
+                }
+            }
+            </script>
+
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+</div>
+
+
+
+<!-- Display liked artwork below -->
+
+<!-- NEXT IS ADD THE ART BELOW IN ROWS OF FOUR WITH PADDING and display a random selection of thier 'liked' art -->
+<!-- FUTURE TODO 
+
+    <div class="artbox-div">
+    <div class="art-row">
+        <div class="art-col">
+            1c
+        </div>
+        <div class="art-col">
+            2c
+        </div>
+        <div class="art-col">
+            3c
+        </div>
+        <div class="art-col">
+            sfcg
+        </div>
+        <div class="art-col">
+            23c
+        </div>
+        <div class="art-col">
+            fsc
+        </div>
+        <div class="art-col">
+            1c
+        </div>
+        <div class="art-col">
+            2c
+        </div>
+        <div class="art-col">
+            3c
+        </div>
+        <div class="art-col">
+            sfcg
+        </div>
+        <div class="art-col">
+            23c
+        </div>
+        <div class="art-col">
+            fsc
+        </div>
+    </div>
+</div>
+-->
+{% endblock %}

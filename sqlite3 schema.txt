@@ -1,0 +1,251 @@
+
+
+
+
+CREATE TABLE UserArt (
+    user_art_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    art_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (art_id) REFERENCES Art(art_id)
+)
+
+
+CREATE TABLE Scenes (
+    scene_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    scene_city_name TEXT NOT NULL,
+    scene_city_picture TEXT NOT NULL,
+    scene_city_description TEXT
+)
+
+CREATE TABLE Users (
+user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+username TEXT NOT NULL,
+email TEXT NOT NULL,
+hash TEXT NOT NULL,
+first_name TEXT,
+last_name TEXT,
+address_line1 TEXT,
+address_line2 TEXT,
+city TEXT,
+state TEXT,
+country TEXT,
+zip_code TEXT,
+phone TEXT
+gender TEXT,
+artist_name TEXT,
+profile_picture_url TEXT
+long_bio TEXT,
+media_link1 TEXT,
+media_link2 TEXT,
+media_link3 TEXT,
+media_link4 TEXT,
+scene_id INTEGER,
+);
+
+
+
+CREATE TABLE UserPurchaseHistory (
+purchase_id INTEGER PRIMARY KEY AUTOINCREMENT,
+user_id INTEGER,
+order_id INTEGER,
+purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+product_price REAL NOT NULL,
+total_tax REAL NOT NULL,
+total_price REAL NOT NULL,
+FOREIGN KEY (user_id) REFERENCES Users(user_id),
+FOREIGN KEY (order_id) REFERENCES Orders(order_id)
+);
+
+
+CREATE TABLE UserLikes (
+like_id INTEGER PRIMARY KEY AUTOINCREMENT,
+user_id INTEGER,
+art_id INTEGER,
+like_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+FOREIGN KEY (user_id) REFERENCES Users(user_id),
+FOREIGN KEY (art_id) REFERENCES Art(art_id)
+);
+
+
+
+CREATE TABLE Art (
+art_id INTEGER PRIMARY KEY AUTOINCREMENT,
+title TEXT NOT NULL,
+image_url TEXT,
+description TEXT,
+materials TEXT,
+genres TEXT,
+print_size_a5 TEXT,
+print_size_a4 TEXT,
+print_size_a3 TEXT,
+a5_price INTEGER,                                    
+a4_price INTEGER,
+a3_price INTEGER
+);
+
+
+CREATE TABLE ShoppingSession (
+session_id INTEGER PRIMARY KEY AUTOINCREMENT,
+user_id INTEGER,
+start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+end_time TIMESTAMP,
+active BOOLEAN DEFAULT TRUE,
+FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
+
+CREATE TABLE ShoppingCartItem (
+item_id INTEGER PRIMARY KEY AUTOINCREMENT,
+session_id INTEGER,
+art_id INTEGER,
+quantity INTEGER,
+FOREIGN KEY (session_id) REFERENCES ShoppingSession(session_id),
+FOREIGN KEY (art_id) REFERENCES Art(art_id)
+);
+
+
+CREATE TABLE Orders (
+order_id INTEGER PRIMARY KEY AUTOINCREMENT,
+user_id INTEGER,
+art_id INTEGER,
+quantity INTEGER,
+product_price REAL NOT NULL,
+total_tax REAL NOT NULL,
+total_price REAL NOT NULL,
+FOREIGN KEY (user_id) REFERENCES Users(user_id),
+FOREIGN KEY (art_id) REFERENCES Art(art_id)
+);
+
+
+
+
+
+Somehow link all the art with the artists with the scenes
+
+This is imdb.com 
+
+CREATE TABLE movies (
+                    id INTEGER,
+                    title TEXT NOT NULL,
+                    year NUMERIC,
+                    PRIMARY KEY(id)
+                );
+CREATE TABLE stars (
+                movie_id INTEGER NOT NULL,
+                person_id INTEGER NOT NULL,
+                FOREIGN KEY(movie_id) REFERENCES movies(id),
+                FOREIGN KEY(person_id) REFERENCES people(id)
+            );
+CREATE TABLE directors (
+                movie_id INTEGER NOT NULL,
+                person_id INTEGER NOT NULL,
+                FOREIGN KEY(movie_id) REFERENCES movies(id),
+                FOREIGN KEY(person_id) REFERENCES people(id)
+            );
+CREATE TABLE ratings (
+                movie_id INTEGER NOT NULL,
+                rating REAL NOT NULL,
+                votes INTEGER NOT NULL,
+                FOREIGN KEY(movie_id) REFERENCES movies(id)
+            );
+CREATE TABLE people (
+                id INTEGER,
+                name TEXT NOT NULL,
+                birth NUMERIC,
+                PRIMARY KEY(id)
+            );
+
+
+This is fiftyville:
+
+CREATE TABLE crime_scene_reports (
+    id INTEGER,
+    year INTEGER,
+    month INTEGER,
+    day INTEGER,
+    street TEXT,
+    description TEXT,
+    PRIMARY KEY(id)
+);
+CREATE TABLE interviews (
+    id INTEGER,
+    name TEXT,
+    year INTEGER,
+    month INTEGER,
+    day INTEGER,
+    transcript TEXT,
+    PRIMARY KEY(id)
+);
+CREATE TABLE atm_transactions (
+    id INTEGER,
+    account_number INTEGER,
+    year INTEGER,
+    month INTEGER,
+    day INTEGER,
+    atm_location TEXT,
+    transaction_type TEXT,
+    amount INTEGER,
+    PRIMARY KEY(id)
+);
+CREATE TABLE bank_accounts (
+    account_number INTEGER,
+    person_id INTEGER,
+    creation_year INTEGER,
+    FOREIGN KEY(person_id) REFERENCES people(id)
+);
+CREATE TABLE airports (
+    id INTEGER,
+    abbreviation TEXT,
+    full_name TEXT,
+    city TEXT,
+    PRIMARY KEY(id)
+);
+CREATE TABLE flights (
+    id INTEGER,
+    origin_airport_id INTEGER,
+    destination_airport_id INTEGER,
+    year INTEGER,
+    month INTEGER,
+    day INTEGER,
+    hour INTEGER,
+    minute INTEGER,
+    PRIMARY KEY(id),
+    FOREIGN KEY(origin_airport_id) REFERENCES airports(id),
+    FOREIGN KEY(destination_airport_id) REFERENCES airports(id)
+);
+CREATE TABLE passengers (
+    flight_id INTEGER,
+    passport_number INTEGER,
+    seat TEXT,
+    FOREIGN KEY(flight_id) REFERENCES flights(id)
+);
+CREATE TABLE phone_calls (
+    id INTEGER,
+    caller TEXT,
+    receiver TEXT,
+    year INTEGER,
+    month INTEGER,
+    day INTEGER,
+    duration INTEGER,
+    PRIMARY KEY(id)
+);
+CREATE TABLE people (
+    id INTEGER,
+    name TEXT,
+    phone_number TEXT,
+    passport_number INTEGER,
+    license_plate TEXT,
+    PRIMARY KEY(id)
+);
+CREATE TABLE bakery_security_logs (
+    id INTEGER,
+    year INTEGER,
+    month INTEGER,
+    day INTEGER,
+    hour INTEGER,
+    minute INTEGER,
+    activity TEXT,
+    license_plate TEXT,
+    PRIMARY KEY(id)
+);

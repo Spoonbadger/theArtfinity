@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Artists
+{% endblock %}
+
+<!-- Need to add a search bar using AJAX through my database top left -->
+
+{% block main %}
+<!-- Display the A-Z of artists 20 results per page to start with showing their profile pictures, their scene/s and genre
+all links to their profile page -->
+    Choose your artist
+    <div class="parent-div">
+        <div class="container mt-5">
+            <h2>Artists</h2>
+            <div class="row">
+              {% for user in users %}
+              <div class="col-md-4 mb-4">
+                <div class="art-card card" style="width: 18rem;">
+                  <img src="{{ url_for('static', filename=user.profile_picture_url) }}" class="card-img-top" alt="{{ user.username }}">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ user.artist_name or user.username }}</h5>
+                    <!-- Add more user details if necessary -->
+                    <a href="{{ url_for('artists', user_id=user.user_id) }}" class="btn btn-primary">View Profile</a>
+                    
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="artist-index">
+        <div class="index-filter">
+            <li letter="A">A</li>
+            <li letter="B">B</li>
+            <li letter="C">C</li>
+            <li letter="D">D</li>
+            <li letter="E">E</li>
+            <li letter="F">F</li>
+            <li letter="G">G</li>
+            <li letter="H">H</li>
+            <li letter="I">I</li>
+            <li letter="J">J</li>
+            <li letter="K">K</li>
+            <li letter="L">L</li>
+            <li letter="M">M</li>
+            <li letter="N">N</li>
+            <li letter="O">O</li>
+            <li letter="P">P</li>
+            <li letter="Q">Q</li>
+            <li letter="R">R</li>
+            <li letter="S">S</li>
+            <li letter="T">T</li>
+            <li letter="U">U</li>
+            <li letter="V">V</li>
+            <li letter="W">W</li>
+            <li letter="X">X</li>
+            <li letter="Y">Y</li>
+            <li letter="Z">Z</li>
+            <li letter="all">View All</li>
+          </div>
+        </div>
+
+        <!-- Full index of artists in three columns -->
+        <div class="artist-index-table-wrapper">
+            <ul class="artist-index-table">
+                <li class="artist-index-name" index-letter="B">
+                <a href="/artist/jason-breish">Jason Breish</a>
+                </li>
+                <li class="artist-index-name" index-letter="C">
+                <a href="/artist/claude-monet">Claude Monet</a>
+                </li>
+                <li class="artist-index-name" index-letter="E">
+                    <a href="/artist/egon-schiele">Egon Schiele</a>
+                </li>
+                <li class="artist-index-name" index-letter="G">
+                    <a href="/artist/gustav-klimpt">Gustav Klimpt</a>
+                </li>
+                <li class="artist-index-name" index-letter="J">
+                    <a href="/artist/van-eyck">Jan van Eyck</a>
+                </li>
+                <li class="artist-index-name" index-letter="J">
+                    <a href="/artist/jan-vermeer">Johannes Vermeer</a>
+                </li>
+                <li class="artist-index-name" index-letter="L">
+                    <a href="/artist/rembrandt">Leonardo da Vinci</a>
+                </li>
+                <li class="artist-index-name" index-letter="M">
+                    <a href="/artist/mc-escher">MC Escher</a>
+                </li>
+                <li class="artist-index-name" index-letter="P">
+                    <a href="/artist/piet-mondrian">Piet Mondrian</a>
+                </li>
+                <li class="artist-index-name" index-letter="V">
+                <a href="/artist/van-gogh">Vincent van Gogh</a>
+                </li>
+            </ul>
+        </div>
+
+
+          <!-- <script>
+          $('.artist-index .index-filter li').on('click', function () {
+            var letter = $(this).attr('letter');
+            if(letter == 'all') {
+            $('.artist-index .inner li').show();
+            }
+            else {
+            $('.artist-index .inner li').hide();
+            $('.artist-index .inner li[index-letter="' + letter + '"]').show();
+            }
+          });
+            
+          </script> -->
+
+    
+{% endblock %}

@@ -1,0 +1,486 @@
+.add-picture-overlay {
+    position: relative; /* Position the overlay relative to the profile picture container */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.artbox-div {
+    /* background-color: */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 200px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+
+.artist-link,
+.social-media-link {
+    color: #D88; /* Adjust color as needed */
+    text-decoration: none;
+}
+
+
+.art-index-table-wrapper {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.art-index-table {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    width: 95%;
+    padding-bottom: 100px;
+}
+
+.art-index-name {
+    box-sizing: border-box;
+    display: flex;
+    flex: 0 0 20%;
+    justify-content: left;
+    padding-left: 55px;
+    padding-top: 25px;
+}
+
+
+.art-index {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+}
+
+
+.artist-index {
+    display: flex;
+    align-items: center;
+}
+
+
+.artist-index-table-wrapper {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.artist-index-table {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    width: 95%;
+    padding-bottom: 100px;
+}
+
+.artist-index-name {
+    box-sizing: border-box;
+    display: flex;
+    flex: 0 0 20%;
+    justify-content: left;
+    padding-left: 55px;
+    padding-top: 25px;
+}
+
+
+.art-row {
+    display: flex;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    flex-wrap: wrap;
+}
+
+.art-col {
+    min-height: 50px;
+    min-width: 50px;
+    background-color: pink;
+    display: flex;
+    width: 18%;
+    padding-bottom: 15%; /* Set padding-bottom to create a square based on width */
+    line-height: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+
+.artist-row {
+    display: flex;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.artist-col {
+    min-height: 50px;
+    min-width: 50px;
+    background-color: pink;
+    display: flex;
+    width: 15%;
+    padding-bottom: 15%; /* Set padding-bottom to create a square based on width */
+    line-height: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+
+.bio-and-links.column-two-thirds {
+    width: 66.66%;
+    text-align: left;
+    margin-left: 5%;
+}
+
+.column-third {
+    width: 33%;
+}
+
+
+.column-two-thirds {
+    width: 66%;
+}
+
+.container-fluid {
+    box-sizing: border-box;
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+
+.center-text {
+    text-align: center;
+}
+
+
+.col {
+    min-height: 80px;
+    min-width: 80px;
+    background-color: pink;
+    display: flex;
+    width: 15%;
+    padding-bottom: 15%; /* Set padding-bottom to create a square based on width */
+    line-height: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 3%;
+    margin-right: 3%;
+    position: relative;
+}
+
+
+
+
+
+
+
+.container-parent {
+    box-sizing: border-box;
+    display: flex;
+    }
+    
+.container-column {
+    box-sizing: border-box;
+    display: flex;
+    }
+
+.container-half {
+    box-sizing: border-box;
+    display: flex;
+    width: 50%;
+}
+
+.container-third {
+    box-sizing: border-box;
+    display: flex;
+    width: 33%;
+}
+
+.container-two-thirds {
+    box-sizing: border-box;
+    display: flex;
+    width: 66%;
+}
+
+.container-column-third {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+}
+
+.container-column-two-thirds {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 66%;
+}
+
+
+.justify-content-left {
+    justify-content: flex-start;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.justify-content-right {
+    justify-content: flex-end;
+}
+
+.align-items-left {
+    align-items: flex-start;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.align-items-right {
+    align-items: flex-end;
+}
+
+.font-xxl {
+font-size: xx-large;
+}
+
+.font-xl {
+    font-size: x-large;
+    }
+
+.font-l {
+    font-size: large;
+}
+
+.font-m {
+    font-size: medium;
+}
+
+.font-s {
+    font-size: small;
+}
+
+.font-xs {
+    font-size: x-small;
+}
+
+.font-xxs {
+    font-size: xx-small;
+}
+
+.margin-small {
+    margin: 10px;
+}
+
+.margin-medium {
+    margin: 25px;
+}
+
+.margin-large {
+    margin: 50px;
+}
+
+
+
+
+
+
+.edit-button {
+    box-sizing: border-box;
+    text-align: right;
+    margin-right: 3%;
+}
+
+
+
+.index-filter {
+    flex-grow: 1;
+    font-weight: 600;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.index-filter li {
+    display: inline-block;
+    margin-right: 20px; /* Adjust spacing between items */
+}
+
+.index-filter li::after {
+    content: '|';
+    font-weight: bold;
+    margin-left: 20px; /* Adjust spacing between '|' and next item */
+    color: #666; /* Adjust color as needed */
+}
+
+/* Remove separator after the last item */
+.index-filter li:last-child::after {
+    content: none;
+    margin-left: 0; /* Remove margin for the last separator */
+}
+
+
+.link:hover {
+    text-decoration: underline;
+}
+
+
+.main-heading {
+    box-sizing: border-box;
+    line-height: 150%;
+    margin-top: 2%;
+}
+
+
+.navbar {
+    margin-bottom: 0%;
+}
+
+/* Size for the logo */
+nav .navbar-brand {
+    font-size: xx-large;
+    padding-left: 3%;
+}
+
+
+/* Colours for the brand */
+nav .navbar-brand .pink {
+    color: #D88;
+}
+
+.parent-div {
+    /* background-color: */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 3%;
+    min-height: 200px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+
+.profile-art {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.profile-container-column {
+    margin-right: 15%;
+    display: flex;
+    flex-direction: column;
+    min-height: 50px;
+}
+
+.profile-container {
+    margin-right: 15%;
+    display: flex;
+
+    min-height: 50px;
+}
+
+
+.profile-info {
+    background-color: lightcoral;
+    display: flex;
+    flex-basis: 55%;
+    flex-direction: row;
+    text-align: center;
+    line-height: 100px;
+}
+
+
+.row {
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    display: flex; /* Use flexbox for easier layout */
+}
+
+
+.table-heading {
+    box-sizing: border-box;
+    padding: 2% 10%;
+}
+
+
+
+/* FOR THE DOLLAR SIGN IN THE BOX */
+
+.input-group {
+    position: relative;
+  }
+  
+  .input-group .input-group-text {
+    position: absolute;
+    top: 50%;
+    left: 10px; /* Adjust as needed */
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    pointer-events: none;
+  }
+  
+  .input-group .form-control {
+    padding-left: 30px; /* Adjust as needed */
+  }
+
+
+
+  /* FOR IMAGE PREVIEW */
+  .img-preview {
+    display: block; /* Replace 'none' with 'block' to make it visible after image is loaded */
+    max-width: 100%; /* Adjust as per your container's width */
+    max-height: 600px; /* Adjust as per your container's height */
+    object-fit: contain; /* Maintain the aspect ratio */
+    margin: 0 auto; /* Center the image */
+}
+
+  /* FOR PROFILE PREVIEW */
+  .profile-preview {
+    display: block; /* Replace 'none' with 'block' to make it visible after image is loaded */
+    max-width: 100%; /* Adjust as per your container's width */
+    max-height: 500px; /* Adjust as per your container's height */
+    object-fit: contain; /* Maintain the aspect ratio */
+    margin: 0 auto; /* Center the image */
+}
+
+
+/* FOR PROFILE IMAGE */
+.profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This ensures the aspect ratio is maintained */
+}
+
+.profile-image {
+    /* Adjust the width and height as needed HOW DO I CHANGE TO WHATEVER THE ARTIST WANTS? */
+    width: 400px;  /* Example width */
+    height: 400px; /* Example height */
+    overflow: hidden;
+    position: relative;
+}
+
+/* ART CARDS */
+.art-card {
+    max-width: 250px;
+    margin: auto; /* Optional: for centering */
+}
+

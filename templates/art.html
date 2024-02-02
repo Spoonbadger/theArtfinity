@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Art
+{% endblock %}
+
+{% block main %}
+    <div style="text-align: left">
+        Please browse and choose art of your liking. You can also search by genre, artist or the title of the piece.
+    </div>
+    <div style="text-align: right; padding-right: 100px">
+        <input> <!-- Search bar here-->
+        <button class="btn btn-light" type="search">Search</button>
+    </div>
+    <div class="art-index">
+        <div class="index-filter">
+            <li letter="A">A</li>
+            <li letter="B">B</li>
+            <li letter="C">C</li>
+            <li letter="D">D</li>
+            <li letter="E">E</li>
+            <li letter="F">F</li>
+            <li letter="G">G</li>
+            <li letter="H">H</li>
+            <li letter="I">I</li>
+            <li letter="J">J</li>
+            <li letter="K">K</li>
+            <li letter="L">L</li>
+            <li letter="M">M</li>
+            <li letter="N">N</li>
+            <li letter="O">O</li>
+            <li letter="P">P</li>
+            <li letter="Q">Q</li>
+            <li letter="R">R</li>
+            <li letter="S">S</li>
+            <li letter="T">T</li>
+            <li letter="U">U</li>
+            <li letter="V">V</li>
+            <li letter="W">W</li>
+            <li letter="X">X</li>
+            <li letter="Y">Y</li>
+            <li letter="Z">Z</li>
+            <li letter="all">View All</li>
+        </div>
+    </div>
+    
+    <div class="container mt-5">
+        <h2>All Artworks</h2>
+        <div class="row">
+          {% for art in all_art %}
+          <div class="col-md-4 mb-4">
+            <div class="art-card card">
+              <img src="{{ url_for('static', filename=art.image_url) }}" class="card-img-top" alt="{{ art.title }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ art.title }}</h5>
+                <p class="card-text">{{ art.description }}</p>
+                <!-- Optionally, you can include other details like artist name, price, etc. -->
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,3 +1,8 @@
+ *{
+box-sizing: border-box;
+
+}
+
 .add-picture-overlay {
     position: relative; /* Position the overlay relative to the profile picture container */
     top: 0;
@@ -176,7 +181,6 @@
     margin-right: 3%;
     position: relative;
 }
-
 
 
 

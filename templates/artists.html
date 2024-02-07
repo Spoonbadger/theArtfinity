@@ -16,15 +16,16 @@ all links to their profile page -->
             <div class="row">
               {% for user in users %}
               <div class="col-md-4 mb-4">
-                <div class="art-card card" style="width: 18rem;">
-                  <img src="{{ url_for('static', filename=user.profile_picture_url) }}" class="card-img-top" alt="{{ user.username }}">
-                  <div class="card-body">
-                    <h5 class="card-title">{{ user.artist_name or user.username }}</h5>
-                    <!-- Add more user details if necessary -->
-                    <a href="{{ url_for('artists', user_id=user.user_id) }}" class="btn btn-primary">View Profile</a>
-                    
-                  </div>
-                </div>
+                <a href="{{ url_for('artists_profile', artist_name=user.artist_name) }}" class="text-decoration-none">
+                    <div class="art-card card" style="width: 18rem;">
+                        <img src="{{ url_for('static', filename=user.profile_picture_url if user.profile_picture_url else 'default-profile.jpg') }}" class="card-img-top" alt="{{ user.username or 'Default Username' }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ user.artist_name }}</h5>
+                            <!-- Add more user details if necessary -->
+                            <button class="btn btn-primary" type="button">View Profile</button>
+                        </div>
+                    </div>
+                </a>
               </div>
               {% endfor %}
             </div>

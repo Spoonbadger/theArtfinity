@@ -5,8 +5,16 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/register" class="needs-validation" novalidate method="post">
-        <form class="row g-3">
+  <div>
+    <h5 class="main-heading">
+        Let's get registered
+    </h5>
+  </div>
+
+  <div class="container-parent">
+      <form action="/register" class="needs-validation row" enctype="multipart/form-data" id="registration_form" method="POST" name="registratin_form" novalidate method="POST">
+
+          <div class="column row">
             <div class="col-md-4">
               <label for="first_name" class="form-label">First name</label>
               <input type="text" class="form-control" id="first_name" placeholder="Frida" required>
@@ -26,15 +34,18 @@
               <input type="text" class="form-control" id="city" required>
             </div>
             <div class="col-md-3">
-              <label for="state4" class="form-label">State</label>
-              <select class="form-select" id="state" required>
-                <option selected disabled value="">Choose...</option>
-                <option>...</option>
+              <label for="state" class="form-label">State</label>
+              <select class="form-select" id="state" name="state" required>
+                  <option value="" disabled selected>Choose...</option>
+                  {% for state_code, state_name in state_options.items() %}
+                      <option value="{{ state_code }}">{{ state_name }}</option>
+                  {% endfor %}
               </select>
-            </div>
+          </div>
+          
             <div class="col-md-3">
               <label for="zip" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="zip" required>
+              <input type="text" class="form-control" id="zip">
             </div>
             <div class="col-12">
               <div class="form-check">
@@ -45,28 +56,29 @@
               </div>
             </div>
 
-            <div class="form-floating mb-3">
+            <div class="col-md-3 form-floating mb-3">
               <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="email" name="email" required type="email">
               <label for="email">email</label>
-          </div>
+            </div>
 
-          <div class="form-floating mb-3">
-              <input aria-describedby="passwordHelpBlock" autocomplete="off" autofocus class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" required type="password">
-                  <div id="passwordHelpBlock" class="form-text">
-                      Your password must be 6-20 characters long, contain letters and numbers, can include special characters, and must not contain spaces or emoji.
-                  </div>
-                  <div class="valid-feedback">
-                      Looks good!
-                  </div>
+            <div class="col-md-3 form-floating mb-3">
+                <input aria-describedby="passwordHelpBlock" autocomplete="off" autofocus class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" required type="password">
+                <div id="passwordHelpBlock" class="form-text">
+                    Your password must be 6-20 characters long, contain letters and numbers, can include special characters, and must not contain spaces or emoji.
+                </div>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="password_confirmation" name="password_confirmation" placeholder="Confirm password" required type="password">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Register</button>
           </div>
-
-          <div class="mb-3">
-              <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="password_confirmation" name="password_confirmation" placeholder="Confirm password" required type="password">
-                  <div class="valid-feedback">
-                      Looks good!
-                  </div>
-          </div>
-          <button class="btn btn-primary" type="submit">Register</button>
-        </form>
-    </form>
+        </div>
+      </form>
+    </div>
 {% endblock %}

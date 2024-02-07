@@ -38,16 +38,24 @@ def after_request(response):
 
 
 @app.route("/", methods=["GET", "POST"])
-@login_required
 def index():
     if request.method == "GET":
-        return render_template("home.html")
+        # Fetch all art from the database
+        all_art = db.execute("SELECT * FROM Art ORDER BY RANDOM() LIMIT 5")
+
+        users = db.execute("SELECT user_id, username, artist_name, profile_picture_url FROM Users ORDER BY RANDOM() LIMIT 5")
+
+        scenes = db.execute("SELECT * FROM Scenes ORDER BY RANDOM() LIMIT 5")
+
+
+        return render_template("home.html", all_art=all_art or [], scenes=scenes or [], users=users or [])
+
 
 
 @app.route("/art")
 def art():
     # Fetch all art from the database
-    all_art = db.execute("SELECT * FROM Art")
+    all_art = db.execute("SELECT * FROM Art ORDER BY RANDOM()")
 
     # Render the template and pass all the art entries
     return render_template("art.html", all_art=all_art)  
@@ -56,7 +64,7 @@ def art():
 @app.route("/artists")
 def artists():
     # Fetch all users' profile picture URLs and other relevant info from the database
-    users = db.execute("SELECT user_id, username, artist_name, profile_picture_url FROM Users")
+    users = db.execute("SELECT user_id, username, artist_name, profile_picture_url FROM Users ORDER BY artist_name")
 
     # Render the template, passing the users data
     return render_template("artists.html", users=users)
@@ -70,7 +78,6 @@ def artists_profile(artist_name):
 
     if not artist_info:
         return "Artist not found", 404
-    print(type(artist_info))
 
     return render_template("artist_profile.html", artist_info=artist_info)
     
@@ -104,6 +111,7 @@ def create_artist_profile():
     
     else:
         return render_template("create_artist_profile.html")
+    
 
 
 @app.route("/delete-art/<int:art_id>")
@@ -120,59 +128,15 @@ def delete_art(art_id):
     return redirect(url_for('profile'))
 
 
-@app.route("/edit_artist_profile", methods=["GET", "POST"])
-def edit_artist_profile():
-    if request.method == "POST":
-
-        # Define varaibles
-        artist_name = request.form.get("artist_name")
-        city = request.form.get("city")
-        short_bio = request.form.get("short_bio")
-        long_bio = request.form.get("long_bio")
-        media_link1 = request.form.get("media_link1")
-        media_link2 = request.form.get("media_link2")
-        media_link3 = request.form.get("media_link3")
-        media_link4 = request.form.get("media_link4")
-
-        if 'user_id' in session:
-            user_id = session['user_id']
-
-            # Check if the record already exists in the database
-            existing_record = db.execute("SELECT * FROM Users WHERE user_id = ?", user_id)
-
-            if existing_record:
-                # If the record exists, update it
-                db.execute("UPDATE Users SET artist_name = ?, city = ?, long_bio = ?, media_link1 = ?, media_link2 = ?, media_link3 = ?, media_link4, state = ?, country = ?, zip = ?, phone = ? WHERE user_id = ?", email, first_name, last_name, address_line1, address_line2, city, state, country, zip_code, phone, user_id)
-            else:
-                # If the record does not exist, insert it
-                db.execute("INSERT INTO Users (email, first_name, last_name, address_line1, address_line2, city, state, country, zip, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", email, first_name, last_name, address_line1, address_line2, city, state, country, zip_code, phone)
-
-        return redirect(url_for('artist_profile'))
-    
-    elif request.method == "GET":
-        if 'user_id' in session:
-            user_id = session['user_id']
-
-            user_info = db.execute("SELECT * FROM Artists WHERE user_id = ?", user_id)
-
-            if user_info:
-                return render_template("edit_artist_profile.html", user_info=user_info, city_options=city_options)
-            else:
-                # Handle case when user_info is not found
-                return apology("User information not found", 404)
-        else:
-            return redirect("login.html")
-    
-
-
-
 @app.route("/edit_profile", methods=["GET", "POST"])
 def edit_profile():
-    if request.method== "POST":
-        if 'user_id' in session:
-            user_id = session['user_id']
+    if request.method == "POST":
+        if 'user_id' not in session:
+            return redirect(url_for("login"))
 
-        # Define variables
+        user_id = session['user_id']
+
+        # Gather form data
         first_name = request.form.get("first_name")
         last_name = request.form.get("last_name")
         address_line1 = request.form.get("address_line1")
@@ -190,57 +154,69 @@ def edit_profile():
         media_link2 = request.form.get("media_link2")
         media_link3 = request.form.get("media_link3")
         media_link4 = request.form.get("media_link4")
-
         scene_id = request.form.get("scene_id")
-        print(scene_id)
 
+        # Initialize variable for relative path
+        relative_path = None
 
-        # Construct the path for the user's upload folder
-        user_upload_folder = os.path.join(BASE_UPLOAD_FOLDER, artist_name)
-
-        # Check if this folder exists, create it if not
-        if not os.path.exists(user_upload_folder):
-            os.makedirs(user_upload_folder)
-
-
-        image_file = request.files['profile_picture_url']
-
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-        if image_file.filename == '':
-            return redirect(request.url)
-
+        # Handle profile picture upload if present
+        image_file = request.files.get('profile_picture_url')
         if image_file and image_file.filename:
             filename = secure_filename(image_file.filename)
-            # Create a subdirectory for the user inside 'static/images'
             user_folder = os.path.join('images', str(user_id))
             full_folder_path = os.path.join(app.static_folder, user_folder)
-
             if not os.path.exists(full_folder_path):
                 os.makedirs(full_folder_path)
-
-            # Save the file
             save_path = os.path.join(full_folder_path, filename)
             image_file.save(save_path)
-            # Relative path to be stored in the database
             relative_path = os.path.join(user_folder, filename)
 
+        # Construct the SQL query and parameters based on whether a new image was uploaded
+        sql_update = """
+            UPDATE Users 
+            SET 
+                scene_id = ?, 
+                email = ?, 
+                first_name = ?, 
+                last_name = ?, 
+                address_line1 = ?, 
+                address_line2 = ?, 
+                city = ?, 
+                state = ?, 
+                country = ?, 
+                zip_code = ?, 
+                phone = ?, 
+                artist_name = ?, 
+                long_bio = ?, 
+                genres = ?, 
+                media_link1 = ?, 
+                media_link2 = ?, 
+                media_link3 = ?, 
+                media_link4 = ?
+        """
 
-            # Check if the record already exists in the database
-            existing_record = db.execute("SELECT * FROM Users WHERE user_id = ?", user_id)
+        parameters = [
+            scene_id, email, first_name, last_name, address_line1, address_line2, city, state, 
+            country, zip_code, phone, artist_name, long_bio, genres, media_link1, media_link2, 
+            media_link3, media_link4
+        ]
 
-            if existing_record:
-                # If the record exists, update it
-                db.execute("UPDATE Users SET scene_id = ?, profile_picture_url = ?, email = ?, first_name = ?, last_name = ?, address_line1 = ?, address_line2 = ?, city = ?, state = ?, country = ?, zip_code = ?, phone = ?, artist_name = ?, long_bio = ?, genres = ?, media_link1 = ?, media_link2 = ?, media_link3 = ?, media_link4 = ? WHERE user_id = ?", scene_id, relative_path, email, first_name, last_name, address_line1, address_line2, city, state, country, zip_code, phone, artist_name, long_bio, genres, media_link1, media_link2, media_link3, media_link4, user_id)
-            else:
-                # If the record does not exist, insert it
-                db.execute("INSERT INTO Users (scene_id, profile_picture_url, email, first_name, last_name, address_line1, address_line2, city, state, country, zip_code, phone, artist_name, long_bio, genres, media_link1, media_link2, media_link3, media_link4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", scene_id, relative_path, email, first_name, last_name, address_line1, address_line2, city, state, country, zip_code, phone, artist_name, long_bio, genres, media_link1, media_link2, media_link3, media_link4)
+        # If a new profile picture was uploaded, include it in the update
+        if relative_path:
+            sql_update += ", profile_picture_url = ?"
+            parameters.append(relative_path)
 
+        # Ensure user_id is added to the parameters list correctly
+        sql_update += " WHERE user_id = ?"
+        parameters.append(user_id)
 
-            return redirect(url_for("profile"))
-        else:
-            return redirect("login.html")
-        
+        # Execute the update
+        db.execute(sql_update, *parameters)
+
+        return redirect(url_for("profile"))
+    
+    
+
     elif request.method == "GET":
         if 'user_id' in session:
             user_id = session['user_id']
@@ -257,15 +233,24 @@ def edit_profile():
 
             art_scene_options = {scene['scene_id']: scene for scene in scenes}
 
+            # Fetch art associated with the user through UserArt
+            user_artworks = db.execute("""
+                SELECT Art.* 
+                FROM Art 
+                JOIN UserArt ON Art.art_id = UserArt.art_id 
+                WHERE UserArt.user_id = ?
+                """, (user_id,))
+
             if user_info:
                 # user_info = user_info[0]
-                return render_template("edit_profile.html", user_info=user_info, scenes=scenes, state_options=state_options, art_scene_options=art_scene_options, profile_picture_url=profile_picture_url)
+                return render_template("edit_profile.html", user_artworks=user_artworks, user_info=user_info, scenes=scenes, state_options=state_options, art_scene_options=art_scene_options, profile_picture_url=profile_picture_url)
             else:
                 # Handle case when user_info is not found
                 return apology("User information not found", 404)
         else:
             return redirect("login.html")
     
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -301,7 +286,7 @@ def login():
 def logout():
     # Forget any user id
     session.clear()
-    return render_template("home.html")
+    return redirect(url_for("index"))
 
 
 @app.route("/profile", methods=["GET", "POST"])
@@ -312,11 +297,11 @@ def profile():
 
             # Fetch the profile picture URL from the database
             profile_picture_result = db.execute("SELECT profile_picture_url FROM Users WHERE user_id = ?", (user_id,))
+            
             if profile_picture_result:
                 profile_picture_url = profile_picture_result[0]['profile_picture_url']
             else:
                 profile_picture_url = None  # Default or placeholder image URL
-
 
             user_info = db.execute("SELECT * FROM Users WHERE user_id = ?", (user_id,))
 
@@ -328,25 +313,17 @@ def profile():
                 WHERE Users.user_id = ?
                 """, (user_id,))
             user_info = user_info_result if user_info_result else None
-            print(user_info)
-
-
-
-            #####
 
             # Fetch art associated with the user through UserArt
-            art_query_result = db.execute("""
+            user_artworks = db.execute("""
                 SELECT Art.* 
                 FROM Art 
                 JOIN UserArt ON Art.art_id = UserArt.art_id 
                 WHERE UserArt.user_id = ?
                 """, (user_id,))
 
-            # Prepare a list of image URLs for Artwork
-            image_urls = [art['image_url'] for art in art_query_result] if art_query_result else []
-
             if user_info:
-                return render_template("profile.html", art_scene_options=art_scene_options, user_info=user_info, profile_picture_url=profile_picture_url, image_urls=image_urls, state_options=state_options)
+                return render_template("profile.html", art_scene_options=art_scene_options, user_info=user_info, profile_picture_url=profile_picture_url, user_artworks=user_artworks, state_options=state_options)
             else:
                 # Handle case when user_info is not found
                 return apology("User information not found", 404)
@@ -406,26 +383,31 @@ def register():
         return redirect("/")
 
     else:
-        return render_template("register.html")
+        return render_template("register.html", state_options=state_options)
     
 
 @app.route("/scenes", methods=["GET", "POST"])
 def scenes():
     if request.method == "GET":
-        scenes = db.execute("SELECT * FROM Scenes")
+        scenes = db.execute("SELECT * FROM Scenes ORDER BY scene_city_name")
 
         return render_template("scenes.html", scenes=scenes)
-    
 
 
 @app.route("/scene_art/<int:scene_id>")
 def scene_art(scene_id):
+
     art = db.execute("""
         SELECT Art.* FROM Art
-        JOIN Users ON Art.user_id = Users.user_id
-        WHERE Users.scene_id = :scene_id
-    """, {"scene_id": scene_id})
-    return render_template("scene_art.html", art=art)
+        JOIN UserArt ON Art.art_id = UserArt.art_id
+        JOIN Users ON UserArt.user_id = Users.user_id
+        WHERE Users.scene_id = ? ORDER BY RANDOM()
+    """, scene_id)
+
+    scene_city_dict = db.execute("SELECT scene_city_name FROM Scenes WHERE scene_id = ?", scene_id)
+    scene_city_name = scene_city_dict[0]['scene_city_name']
+
+    return render_template("scene_art.html", art=art, scene_city_name=scene_city_name)
 
 
 

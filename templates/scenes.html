@@ -50,15 +50,17 @@ when you click on a city it takes you to a random selection of art from that cit
     <div class="row">
         {% for scene in scenes %}
         <div class="col-md-4 mb-4">
-        <div class="art-card card">
-            <img src="{{ url_for('static', filename=scene.scene_city_picture) }}" class="card-img-top" alt="{{ scene.scene_city_name }}">
-            <div class="card-body">
-            <h5 class="card-title">{{ scene.scene_city_name }}</h5>
-            <p class="card-text">{{ scene.scene_city_description }}</p>
-            <!-- Optionally, you can include other details like artist name, price, etc. -->
-            <a href="{{ url_for('scene_art', scene_id=scene.scene_id) }}" class="btn btn-primary">View Art</a>
-            </div>
-        </div>
+            <a href="{{ url_for('scene_art', scene_id=scene.scene_id) }}" class="text-decoration-none">
+                <div class="art-card card">
+                    <img src="{{ url_for('static', filename=scene.scene_city_picture) }}" class="card-img-top" alt="{{ scene.scene_city_name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ scene.scene_city_name }}</h5>
+                        <p class="card-text">{{ scene.scene_city_description }}</p>
+                        <!-- This button is now optional since the whole card is clickable -->
+                        <button class="btn btn-primary" type="button">View Art</button>
+                    </div>
+                </div>
+            </a>
         </div>
         {% endfor %}
     </div>

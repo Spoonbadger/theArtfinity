@@ -17,71 +17,77 @@
     </div>
 </div>
 <div style="text-align: left; padding-left: 60px">
-    <!-- show a random selection of art for sale, random with every load -->
-    <h5>Arts</h5>
+    <h4>Arts</h4>
 </div>
-<div class="artbox-div">
-    <div class="artist-row">
-        <div class="artist-col">
-            1c
-        </div>
-        <div class="artist-col">
-            2c
-        </div>
-        <div class="artist-col">
-            3c
-        </div>
-        <div class="artist-col">
-            sfcg
-        </div>
-        <div class="artist-col">
-            23c
+<div class="container-parent">
+    <div class="container mt-5">
+        <div class="row">
+        {% if all_art %}
+            {% for art in all_art[:5] %}
+            <div class="col-md-4 mb-4">
+                <div class="art-card card">
+                <img src="{{ url_for('static', filename=art.image_url) }}" class="card-img-top" alt="{{ art.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ art.title }}</h5>
+                    <p class="card-text">{{ art.description }}</p>
+                    <!-- Optionally, you can include other details like artist name, price, etc. -->
+                </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
         </div>
     </div>
 </div>
 <div style="text-align: left; padding-left: 60px">
-    <!-- show a random selection of art for sale, random with every load -->
-    <h5>Artists</h5>
+    <h4>Artists</h4>
 </div>
-<div class="artbox-div">
-    <div class="artist-row">
-        <div class="artist-col">
-            1c
-        </div>
-        <div class="artist-col">
-            2c
-        </div>
-        <div class="artist-col">
-            3c
-        </div>
-        <div class="artist-col">
-            sfcg
-        </div>
-        <div class="artist-col">
-            23c
+<div class="container-parent">
+    <div class="parent-div">
+        <div class="container mt-5">
+            <div class="row">
+            {% if users %}
+                {% for user in users[:5] %}
+                <div class="col-md-4 mb-4">
+                    <div class="art-card card" style="width: 18rem;">
+                    <!-- Check if user has a profile picture, otherwise use a default image -->
+                    <img src="{{ url_for('static', filename=user.profile_picture_url if user.profile_picture_url else 'default-profile.jpg') }}" class="card-img-top" alt="{{ user.username }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user.artist_name or user.username }}</h5>
+                        <!-- Add more user details if necessary -->
+                        <a href="{{ url_for('artists_profile', artist_name=user.username if user.username else 'default') }}" class="btn btn-primary">View Profile</a>
+
+                        
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+            </div>
         </div>
     </div>
 </div>
 <div style="text-align: left; padding-left: 60px">
-    <!-- show a random selection of art for sale, random with every load -->
-    <h5>Scenes</h5>
+    <h4>City Art Scenes</h4>
 </div>
-<div class="artbox-div">
-    <div class="artist-row">
-        <div class="artist-col">
-            1c
-        </div>
-        <div class="artist-col">
-            2c
-        </div>
-        <div class="artist-col">
-            3c
-        </div>
-        <div class="artist-col">
-            sfcg
-        </div>
-        <div class="artist-col">
-            23c
+<div class="container-parent">
+    <div class="container mt-5">
+        <div class="row">
+            {% if scenes %}
+                {% for scene in scenes %}
+                <div class="col-md-4 mb-4">
+                <div class="art-card card">
+                    <img src="{{ url_for('static', filename=scene.scene_city_picture) }}" class="card-img-top" alt="{{ scene.scene_city_name }}">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ scene.scene_city_name }}</h5>
+                    <p class="card-text">{{ scene.scene_city_description }}</p>
+                    <!-- Optionally, you can include other details like artist name, price, etc. -->
+                    <a href="{{ url_for('scene_art', scene_id=scene.scene_id) }}" class="btn btn-primary">View Art</a>
+                    </div>
+                </div>
+                </div>
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
 </div>

@@ -12,41 +12,37 @@
     </div>
 
 
-
     <div class="container-parent">
         <form class="row g-4" enctype="multipart/form-data" id="upload_form" method="POST">
             <div class="container-column-third">
                 <div class="profile-image">
                     {% if profile_picture_url %}
-                    <img src="{{ url_for('static', filename=profile_picture_url) }}" alt="Profile Picture" class="profile-pic">
+                    <img src="{{ url_for('static', filename=profile_picture_url) }}" alt="Profile Picture" class="profile-pic" id="profilePic">
                     {% else %}
-                    <img src="{{ url_for('static', filename='placeholder-img.jpg') }}" alt="Placeholder Image" class="profile-pic">
+                    <img src="{{ url_for('static', filename='placeholder-img.jpg') }}" alt="Placeholder Image" class="profile-pic" id="profilePic">
                     {% endif %}
-                    <div class="add-picture-overlay">
-                        <label for="profile_picture_url" class="upload-label" id="upload_text">Click to add profile picture</label>
-                        <input type="file" id="profile_picture_url" name="profile_picture_url" accept="image/*" style="display: none;">
-                    </div>
-                    <img id="imagePreview" src="#" alt="Image Preview" class="profile-preview" style="display:none;"/>
-                </div>    
+                    <input type="file" id="profile_picture_url" name="profile_picture_url" accept="image/*" style="display: none;">
+                </div>
+                  
                 <div class="container-column-third">
                 </div>
             </div>
 
             <script>
+                document.getElementById('profilePic').addEventListener('click', function() {
+                    document.getElementById('profile_picture_url').click();
+                });
+            
                 function readURL(input) {
                     if (input.files && input.files[0]) {
                         var reader = new FileReader();
                         
                         reader.onload = function(e) {
-                            document.getElementById('imagePreview').src = e.target.result;
-                            document.getElementById('imagePreview').style.display = 'block';
-
-                            // Hide the placeholder image and upload text
-                            document.getElementById('placeholder_image').style.display = 'none';
-                            document.getElementById('upload_text').style.display = 'none';
+                            document.getElementById('profilePic').src = e.target.result;
+                            // Assuming you want to immediately show the selected image as a preview
                         }
                         
-                        reader.readAsDataURL(input.files[0]); // convert to base64 string
+                        reader.readAsDataURL(input.files[0]);
                     }
                 }
             
@@ -55,130 +51,157 @@
                 };
             </script>
 
-
-        <div class="column-two-thirds">
-            <div>
-                <div class="col-md-4">
-                    <label for="first_name" class="form-label">First name(s)</label>
-                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Frida" required value="{{ user_info[0]['first_name'] }}">
-                </div>
-                <div class="col-md-4">
-                    <label for="last_name" class="form-label">Last name(s)</label>
-                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Basquiat" required value="{{ user_info[0]['last_name'] }}">
-                </div>
-            </div>
-            <div class="col-md-4">
-                <label for="artist_name" class="form-label">Artist name</label>
-                <input type="text" class="form-control" id="artist_name" name="artist_name" placeholder="Frida Basquiat" required value="{{ user_info[0]['artist_name'] }}">
-            </div>
-            <div class="col-md-4">
-                <label for="scene_id" class="form-label">Nearest City Scene</label>
-                <select class="form-select" id="scene_id" name="scene_id" required>
-                    <option disabled selected value="">Choose...</option>
-                    {% for scene_code, scene in art_scene_options.items() %}
-                    <option value="{{ scene_code }}" {% if user_info[0]['scene_id'] == scene_code %}selected{% endif %}>
-                        {{ scene.scene_city_name }}
-                    </option>
-                    {% endfor %}
-                </select>
-            </div>
-            </div>
-            <div>
-                <div class="col-md-8">
-                    <label for="long_bio" class="form-label">Biography</label>
-                    <textarea class="form-control" id="long_bio" name="long_bio" required rows="6">{{ user_info[0]['long_bio'] }}</textarea>
-                </div>
-            </div>
-            <div>
-                <div class="col-md-4">
-                    <label for="genres" class="form-label">Genres</label>
-                    <input class="form-control" id="genres" name="genres"></input>
-                </div>
-            </div>
-            <div>
-                <div class="col-md-4">
-                    <label for="website" class="form-label">Website</label>
-                    <input class="form-control" id="website" name="website"></input>
-                </div>
-            </div>
-            <div>
-                <div class="col-md-5">
-                    <label for="media_link1" class="form-label">Social Media Link 1</label>
-                    <input type="text" class="form-control" id="media_link1" name="media_link1" value="{{ user_info[0]['media_link1'] }}">
-                </div>
-                <div class="col-md-5">
-                    <label for="media_link2" class="form-label">Social Media Link 2</label>
-                    <input type="text" class="form-control" id="media_link2" name="media_link2" value="{{ user_info[0]['media_link2'] }}">
-                </div>
-            </div>
-            <div>
-                <div class="col-md-5">
-                    <label for="media_link3" class="form-label">Social Media Link 3</label>
-                    <input type="text" class="form-control" id="media_link3" name="media_link3" value="{{ user_info[0]['media_link3'] }}">
-                </div>
-                <div class="col-md-5">
-                    <label for="media_link4" class="form-label">Social Media Link 4</label>
-                    <input type="text" class="form-control" id="media_link4" name="media_link4" value="{{ user_info[0]['media_link4'] }}">
-                </div>
-            </div>
-            <div>
-                <div class="col-md-5">
-                    <label for="address_line1" class="form-label">Address Line 1</label>
-                    <input type="text" class="form-control" id="address_line1" name="address_line1" value="{{ user_info[0]['address_line1'] }}">
-                </div>
-            </div>
-            <div>
-                <div class="col-md-5">
-                    <label for="address_line2" class="form-label">Address Line 2</label>
-                    <input type="text" class="form-control" id="address_line2" name="address_line2" value="{{ user_info[0]['address_line2'] }}">
-                </div>
-            </div>
             
-            <div class="col-md-5">
-                <label for="city" class="form-label">City</label>
-                <input type="text" class="form-control" id="city" name="city" required value="{{ user_info[0]['city'] }}">
-            </div>
-            <div class="col-md-3">
-                <label for="state" class="form-label">State</label>
-                <select class="form-select" id="state" name="state" required>
-                    <option value="" disabled selected>Choose...</option>
-                    {% for state_code, state_name in state_options.items() %}
-                        <option value="{{ state_code }}"{% if user_info[0]['state'] == state_code %}selected{% endif %}>
-                        {{ state_name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-3">
-                <label for="zip_code" class="form-label">Zip</label>
-                <input type="number" class="form-control" id="zip_code" name="zip_code" required value="{{ user_info[0]['zip_code'] }}">
-            </div>
-            <div>
-                <div class="col-md-4">
-                    <label for="email" class="form-label">Email</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="email"  name="email" aria-describedby="inputGroupPrepend2" value="{{ user_info[0]['email'] }}">
+
+
+            <div class="column-two-thirds">
+                <div>
+                    <div class="col-md-4">
+                        <label for="first_name" class="form-label">First name(s)</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Frida" required value="{{ user_info[0]['first_name'] }}">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="last_name" class="form-label">Last name(s)</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Basquiat" required value="{{ user_info[0]['last_name'] }}">
                     </div>
                 </div>
-            </div>
-            <div>
                 <div class="col-md-4">
-                    <!-- Best to have a little box pop up here. I've forgot the bootstap name for this -->
-                    <div>
-                        <button class="btn btn-light"  id="change_password"  name="change_password" type="submit"aria-describedby="inputGroupPrepend2">Change Password</button>
+                    <label for="artist_name" class="form-label">Artist name</label>
+                    <input type="text" class="form-control" id="artist_name" name="artist_name" placeholder="Frida Basquiat" required value="{{ user_info[0]['artist_name'] }}">
+                </div>
+                <div class="col-md-4">
+                    <label for="scene_id" class="form-label">Nearest City Scene</label>
+                    <select class="form-select" id="scene_id" name="scene_id" required="">
+                        <option disabled="" selected="" value="">Choose...</option>
+                        {% for scene_code, scene in art_scene_options.items() %}
+                        <option value="{{ scene_code }}" {% if user_info[0]['scene_id'] == scene_code %}selected{% endif %}>
+                            {{ scene.scene_city_name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                </div>
+                <div>
+                    <div class="col-md-8">
+                        <label for="long_bio" class="form-label">Biography</label>
+                        <textarea class="form-control" id="long_bio" name="long_bio" required rows="6">{{ user_info[0]['long_bio'] }}</textarea>
                     </div>
                 </div>
-            </div>
-            <script>
-                document.getElementById("change_password").addEventListener("click", function() {
-                    window.location.href = "/change_password";
-                });
-            
-            </script>
-            <div class="col-12 justify-content-left">
-                <button class="btn btn-primary" type="submit">Save</button>
-            </div>
+                <div>
+                    <div class="col-md-4">
+                        <label for="genres" class="form-label">Genres</label>
+                        <input class="form-control" id="genres" name="genres"></input>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-4">
+                        <label for="website" class="form-label">Website</label>
+                        <input class="form-control" id="website" name="website"></input>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-5">
+                        <label for="media_link1" class="form-label">Social Media Link 1</label>
+                        <input type="text" class="form-control" id="media_link1" name="media_link1" value="{{ user_info[0]['media_link1'] }}">
+                    </div>
+                    <div class="col-md-5">
+                        <label for="media_link2" class="form-label">Social Media Link 2</label>
+                        <input type="text" class="form-control" id="media_link2" name="media_link2" value="{{ user_info[0]['media_link2'] }}">
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-5">
+                        <label for="media_link3" class="form-label">Social Media Link 3</label>
+                        <input type="text" class="form-control" id="media_link3" name="media_link3" value="{{ user_info[0]['media_link3'] }}">
+                    </div>
+                    <div class="col-md-5">
+                        <label for="media_link4" class="form-label">Social Media Link 4</label>
+                        <input type="text" class="form-control" id="media_link4" name="media_link4" value="{{ user_info[0]['media_link4'] }}">
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-5">
+                        <label for="address_line1" class="form-label">Address Line 1</label>
+                        <input type="text" class="form-control" id="address_line1" name="address_line1" value="{{ user_info[0]['address_line1'] }}">
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-5">
+                        <label for="address_line2" class="form-label">Address Line 2</label>
+                        <input type="text" class="form-control" id="address_line2" name="address_line2" value="{{ user_info[0]['address_line2'] }}">
+                    </div>
+                </div>
+                
+                <div class="col-md-5">
+                    <label for="city" class="form-label">City</label>
+                    <input type="text" class="form-control" id="city" name="city" required value="{{ user_info[0]['city'] }}">
+                </div>
+                <div class="col-md-3">
+                    <label for="state" class="form-label">State</label>
+                    <select class="form-select" id="state" name="state" required>
+                        <option value="" disabled selected>Choose...</option>
+                        {% for state_code, state_name in state_options.items() %}
+                            <option value="{{ state_code }}"{% if user_info[0]['state'] == state_code %}selected{% endif %}>
+                            {{ state_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="zip_code" class="form-label">Zip</label>
+                    <input type="number" class="form-control" id="zip_code" name="zip_code" required value="{{ user_info[0]['zip_code'] }}">
+                </div>
+                <div>
+                    <div class="col-md-4">
+                        <label for="email" class="form-label">Email</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="email"  name="email" aria-describedby="inputGroupPrepend2" value="{{ user_info[0]['email'] }}">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-4">
+                        <!-- Best to have a little box pop up here. I've forgot the bootstap name for this -->
+                        <div>
+                            <button class="btn btn-light"  id="change_password"  name="change_password" type="button" aria-describedby="inputGroupPrepend2">Change Password</button>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    document.getElementById("change_password").addEventListener("click", function() {
+                        window.location.href = "/change_password";
+                    });
+                
+                </script>
+                
+                <div class="container mt-5">
+                    <h2>User's Artwork</h2>
+                    <div class="row">
+                      {% for art in user_artworks %}
+                      <div class="col-md-4 mb-4">
+                        <div class="art-card card">
+                          <img src="{{ url_for('static', filename=art.image_url) }}" class="card-img-top" alt="Art Piece">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ art.title }}</h5>
+                            <p class="card-text">{{ art.description }}</p>
+                            <a href="#" onclick="confirmDelete('{{ url_for('delete_art', art_id=art.art_id) }}')" class="btn btn-danger btn-sm">Delete</a>
+                          </div>
+                
+                          <script>
+                            function confirmDelete(deleteUrl) {
+                                if (confirm("Are you sure you want to delete this art piece?")) {
+                                    window.location.href = deleteUrl;
+                                }
+                            }
+                            </script>
+                
+                        </div>
+                      </div>
+                      {% endfor %}
+                <div class="col-12 justify-content-left">
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </div>
 
-        </div>
+            </div>
         </form>
     </div>
     <div class="py-0"></div>

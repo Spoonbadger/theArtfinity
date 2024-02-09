@@ -5,13 +5,16 @@
 {% endblock %}
 
 {% block main %}
-    <div style="text-align: left">
-        Please browse and choose art of your liking. You can also search by genre, artist or the title of the piece.
-    </div>
-    <div style="text-align: right; padding-right: 100px">
-        <input> <!-- Search bar here-->
-        <button class="btn btn-light" type="search">Search</button>
-    </div>
+    <section class="flex-parent">
+        <div class="flex-child" style="text-align: left">
+          Please browse and choose art of your liking. You can also search by genre, artist, or the title of the piece.
+        </div>
+        <div class="flex-child" style="text-align: right; padding-right: 100px">
+            <input> <!-- Search bar here-->
+            <button class="btn btn-light" type="search">Search</button>
+        </div>
+    </section>
+
     <div class="art-index">
         <div class="index-filter">
             <li letter="A">A</li>
@@ -44,21 +47,26 @@
         </div>
     </div>
     
-    <div class="container mt-5">
-        <h2>All Artworks</h2>
-        <div class="row">
-          {% for art in all_art %}
-          <div class="col-md-4 mb-4">
-            <div class="art-card card">
-              <img src="{{ url_for('static', filename=art.image_url) }}" class="card-img-top" alt="{{ art.title }}">
-              <div class="card-body">
-                <h5 class="card-title">{{ art.title }}</h5>
-                <p class="card-text">{{ art.description }}</p>
-                <!-- Optionally, you can include other details like artist name, price, etc. -->
-              </div>
+    <div class="container-fluid mt-4">
+      <h2>All Artworks</h2>
+      <div class="row g-4">
+        {% for art in all_art %}
+        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+          <a href="{{ art.url }}" class="text-decoration-none">
+          <div class="art-card card">
+            <div class="art-image" style="background-image: url('{{ url_for('static', filename=art.image_url) }}');" data-title="{{ art.artist_name }}"></div>
+            <div class="card-body">
+              <p class="card-title">{{ art.title }}</p>
             </div>
           </div>
-          {% endfor %}
+          </a>
         </div>
+        {% endfor %}
+      </div>
     </div>
+    
+    
+    
+  
 {% endblock %}
+

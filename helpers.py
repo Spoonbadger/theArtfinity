@@ -1,6 +1,7 @@
 import csv
 import datetime
 import pytz
+import re
 import requests
 import subprocess
 import urllib
@@ -32,6 +33,11 @@ def login_required(f):
             return redirect("/login")
         return f(*args, **kwargs)
     return decorated_function
+
+
+def slugify(text):
+    # Replace non-word characters with hyphens and lower the case
+    return re.sub(r'\W+', '-', text).lower()
 
 
 art_scene_options = {

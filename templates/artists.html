@@ -9,6 +9,7 @@
 {% block main %}
 <!-- Display the A-Z of artists 20 results per page to start with showing their profile pictures, their scene/s and genre
 all links to their profile page -->
+<<<<<<< Updated upstream
     Choose your artist
     <div class="parent-div">
         <div class="container mt-5">
@@ -27,9 +28,31 @@ all links to their profile page -->
                 </div>
               </div>
               {% endfor %}
+=======
+<div style="text-align: left; padding-left: 60px">
+    <h4>Artists</h4>
+</div>
+<div class="container-parent">
+    <div class="container-fluid mt-4">
+        <div class="row g-4">
+        {% if users %}
+            {% for user in users[:6] %}
+            <div class="col-lg-2 col-md-4 col-sm-6 col-6">
+                <a href="{{ url_for('artist_profile', artist_name=user.artist_name) }}" class="text-decoration-none">
+                    <div class="art-card card">
+                        <div class="art-image" style="background-image: url('{{ url_for('static', filename=user.profile_picture_url if user.profile_picture_url else 'default-profile.jpg') }}');" data-title="{{ user.artist_name }}"></div>
+                        <div class="card-body">
+                            <h5 class="card-title black-font">{{ user.artist_name }}</h5>
+                        </div>
+                    </div>
+                </a>
+>>>>>>> Stashed changes
             </div>
+            {% endfor %}
+        {% endif %}
         </div>
     </div>
+</div>
 
     <div class="artist-index">
         <div class="index-filter">

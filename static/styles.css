@@ -1,3 +1,7 @@
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 .add-picture-overlay {
     position: relative; /* Position the overlay relative to the profile picture container */
     top: 0;
@@ -7,7 +11,7 @@
 }
 
 .artbox-div {
-    /* background-color: */
+    /* background-color: if desired */
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -142,6 +146,7 @@
     margin-left: 5%;
 }
 
+
 .column-third {
     width: 33%;
 }
@@ -225,6 +230,17 @@
     width: 66%;
 }
 
+
+.flex-parent {
+    display: flex;
+    width: 100%;
+}
+  
+.flex-child {
+    flex: 1;
+    margin: 10px;
+}
+  
 
 .justify-content-left {
     justify-content: flex-start;
@@ -411,7 +427,7 @@ nav .navbar-brand .pink {
     width: 100%;
     margin-top: 2%;
     margin-bottom: 2%;
-    display: flex; /* Use flexbox for easier layout */
+    display: flex;
 }
 
 
@@ -422,7 +438,6 @@ nav .navbar-brand .pink {
 
 
 
-/* FOR THE DOLLAR SIGN IN THE BOX */
 
 .input-group {
     position: relative;
@@ -478,9 +493,51 @@ nav .navbar-brand .pink {
     position: relative;
 }
 
+
 /* ART CARDS */
 .art-card {
-    max-width: 250px;
-    margin: auto; /* Optional: for centering */
-}
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .art-image {
+    width: 100%;
+    padding-top: 100%; /* Keeps the aspect ratio 1:1 */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  /* Hover Content Styling */
+  .art-image::after {
+    content: attr(data-title); /* Use a data attribute for the artist name */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    opacity: 0; /* Hide by default */
+    transition: opacity 0.5s; /* Smooth transition */
+    overflow: hidden; /* Ensures text doesn't overflow */
+  }
+  
+  .art-card:hover .art-image::after {
+    opacity: 1; /* Show on hover */
+  }
 
+
+/* Change link text from blue to black */
+.black-font {
+    color: black; /* Change the text color to black */
+    text-decoration: none; /* Optional: Removes the underline from links */
+}

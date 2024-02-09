@@ -6,11 +6,12 @@ import os
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 
-from helpers import allowed_file, apology, art_scene_options, login_required, state_options # Anything else
+from helpers import allowed_file, apology, art_scene_options, login_required, slugify, state_options # Anything else
 
 
 app = Flask(__name__)
 
+app.jinja_env.filters['slugify'] = slugify
 
 # Configure session to use filesystem
 # Sets session to the browsing length only
@@ -28,6 +29,8 @@ BASE_UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'static', 'IMAGES')
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'webp'])
 
 
+
+
 @app.after_request
 def after_request(response):
     """Ensures the responses aren't cached"""
@@ -41,6 +44,7 @@ def after_request(response):
 @login_required
 def index():
     if request.method == "GET":
+<<<<<<< Updated upstream
         return render_template("home.html")
 
 
@@ -48,9 +52,66 @@ def index():
 def art():
     # Fetch all art from the database
     all_art = db.execute("SELECT * FROM Art")
+=======
+        # Fetch all art from the database
+        all_art = db.execute("SELECT * FROM Art ORDER BY RANDOM() LIMIT 6")
+        users = db.execute("SELECT user_id, username, artist_name, profile_picture_url FROM Users ORDER BY RANDOM() LIMIT 6")
+        scenes = db.execute("SELECT * FROM Scenes ORDER BY RANDOM() LIMIT 6")
 
-    # Render the template and pass all the art entries
-    return render_template("art.html", all_art=all_art)  
+        return render_template("home.html", all_art=all_art or [], scenes=scenes or [], users=users or [])
+
+
+
+@app.route("/art")
+def all_artworks():
+    all_art = db.execute("""
+        SELECT Art.title, Art.image_url, Users.artist_name
+        FROM Art
+        JOIN UserArt ON Art.art_id = UserArt.art_id
+        JOIN Users ON UserArt.user_id = Users.user_id
+        ORDER BY Art.title
+    """)
+    # Process each artwork to include a URL path or complete URL
+    for art in all_art:
+        slugged_title = (art['title'])
+        slugged_artist_name = slugify(art['artist_name'])
+        # Construct the path or URL here
+        art['url'] = f"/art/{slugged_artist_name}/{slugged_title}"
+
+    return render_template("art.html", all_art=all_art)
+ 
+
+@app.route("/art/<artist_name>/<art_title>")
+def artwork(artist_name, art_title):
+    search_artist_name = artist_name.replace("-", " ").replace("_", " ")
+    search_title = art_title
+
+    query = """
+        SELECT Art.*, Users.username, Users.artist_name
+        FROM Art
+        INNER JOIN UserArt ON Art.art_id = UserArt.art_id
+        INNER JOIN Users ON UserArt.user_id = Users.user_id
+        WHERE LOWER(Users.artist_name) LIKE LOWER(?) AND LOWER(Art.title) LIKE LOWER(?)
+    """
+    art_details = db.execute(query, "%" + search_artist_name + "%", "%" + search_title + "%")
+
+    if art_details:
+        # Assuming you want to display the first match or a specific artwork
+        art_detail = art_details[0] if art_details else None
+        
+        # Generate the URL for the artwork's image
+        image_url = url_for('static', filename=art_detail['image_url'])
+        
+        # Pass the image URL along with other artwork details to the HTML template
+        return render_template("artwork.html", art_detail=art_detail, image_url=image_url)
+    else:
+        return "Artwork not found", 404
+
+
+
+
+>>>>>>> Stashed changes
+
 
 
 @app.route("/artists")
@@ -64,7 +125,7 @@ def artists():
 
 
 @app.route("/artists/<artist_name>")
-def artists_profile(artist_name):
+def artist_profile(artist_name):
     artist_info = db.execute("SELECT * FROM Users WHERE artist_name = :artist_name", artist_name=artist_name)
     artist_info = artist_info[0]
 

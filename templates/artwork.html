@@ -1,0 +1,19 @@
+{%  extends "layout.html" %}
+
+{% block title %}
+    artwork
+{% endblock %}
+
+{% block main %}
+
+    <div class="artwork-detail">
+        <h2>{{ art_detail.title }}</h2>
+        <p>By: {{ art_detail.artist_name }}</p>
+        <img src="{{ image_url }}" alt="{{ art_detail.title }}">
+        <p>{{ art_detail.description }}</p>
+    </div>
+
+
+
+
+{% endblock %}

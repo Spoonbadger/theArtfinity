@@ -17,75 +17,58 @@
     </div>
 </div>
 <div style="text-align: left; padding-left: 60px">
-    <!-- show a random selection of art for sale, random with every load -->
-    <h5>Arts</h5>
+    <h4>Arts</h4>
 </div>
-<<<<<<< Updated upstream
-<div class="artbox-div">
-    <div class="artist-row">
-        <div class="artist-col">
-            1c
-        </div>
-        <div class="artist-col">
-            2c
-        </div>
-        <div class="artist-col">
-            3c
-        </div>
-        <div class="artist-col">
-            sfcg
-        </div>
-        <div class="artist-col">
-            23c
-=======
-<div class="container-parent">
-    <div class="container-fluid mt-4">
-        <div class="row g-4">
-        {% if all_art %}
-            {% for art in all_art[:6] %}
-            <div class="col-lg-2 col-md-4 col-sm-6 col-6">
-                <a href="{{ art.url }}" class="text-decoration-none">
-                <div class="art-card card">
-                    <div class="art-image" style="background-image: url('{{ url_for('static', filename=art.image_url) }}');" data-title="{{ art.title }}"></div>
+<div id="artCarousel" class="carousel slide" data-bs-ride="carousel">
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+      {% for art in all_art %}
+        <button type="button" data-bs-target="#artCarousel" data-bs-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ loop.index }}"></button>
+      {% endfor %}
+    </div>
+    <!-- Carousel items -->
+    <div id="artCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for chunk in all_art|batch(6, '&nbsp;') %}
+            <div class="carousel-item {% if loop.first %}active{% endif %}">
+              <div class="d-flex justify-content-center flex-wrap row g-4">
+                {% for art in chunk %}
+                <div class="col-2">
+                  <a href="{{ art.url }}" class="text-decoration-none">
+                    <div class="art-card">
+                      <div class="art-image-carousel" style="background-image: url('{{ url_for('static', filename=art.image_url) }}');" data-title="{{ art.title }}"></div>
+                      <div class="overlay">{{ art.title }}</div>
+                    </div>
+                  </a>
                 </div>
-                </a>
+                {% endfor %}
+              </div>
             </div>
             {% endfor %}
-        {% endif %}
->>>>>>> Stashed changes
-        </div>
-    </div>
-</div>
+          </div>
+          
+        <button class="carousel-control-prev" type="button" data-bs-target="#artCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#artCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      
+  
 <div style="text-align: left; padding-left: 60px">
-    <!-- show a random selection of art for sale, random with every load -->
-    <h5>Artists</h5>
+    <h4>Artists</h4>
 </div>
-<<<<<<< Updated upstream
-<div class="artbox-div">
-    <div class="artist-row">
-        <div class="artist-col">
-            1c
-        </div>
-        <div class="artist-col">
-            2c
-        </div>
-        <div class="artist-col">
-            3c
-        </div>
-        <div class="artist-col">
-            sfcg
-        </div>
-        <div class="artist-col">
-            23c
-=======
-<div class="container-parent">
-    <div class="container-fluid mt-4">
-        <div class="row g-4">
+<div class="container-parent mb-5">
+    <div class="container-fluid mt-0 mb-5">
+        <div class="row g-4 mt-0 mb-5">
         {% if users %}
             {% for user in users[:6] %}
             <div class="col-lg-2 col-md-4 col-sm-6 col-6">
                 <a href="{{ url_for('artist_profile', artist_name=user.artist_name) }}" class="text-decoration-none">
-                    <div class="art-card card">
+                    <div class="art-card1 card">
                         <div class="art-image" style="background-image: url('{{ url_for('static', filename=user.profile_picture_url if user.profile_picture_url else 'default-profile.jpg') }}');" data-title="{{ user.artist_name }}"></div>
                         <div class="card-body">
                             <h5 class="card-title black-font">{{ user.artist_name }}</h5>
@@ -95,42 +78,22 @@
             </div>
             {% endfor %}
         {% endif %}
->>>>>>> Stashed changes
         </div>
     </div>
 </div>
 
 <div style="text-align: left; padding-left: 60px">
-    <!-- show a random selection of art for sale, random with every load -->
-    <h5>Scenes</h5>
+    <h4>City Art Scenes</h4>
 </div>
-<<<<<<< Updated upstream
-<div class="artbox-div">
-    <div class="artist-row">
-        <div class="artist-col">
-            1c
-        </div>
-        <div class="artist-col">
-            2c
-        </div>
-        <div class="artist-col">
-            3c
-        </div>
-        <div class="artist-col">
-            sfcg
-        </div>
-        <div class="artist-col">
-            23c
-=======
-<div class="container-parent">
-    <div class="container-fluid mt-4">
-        <div class="row g-4">
+<div class="container-parent mb-5">
+    <div class="container-fluid mt-0 mb-5">
+        <div class="row g-4 mt-0 mb-5">
             {% if scenes %}
                 {% for scene in scenes %}
                 <!-- Update: Make the whole card clickable -->
                 <div class="col-lg-2 col-md-4 col-sm-6 col-6">
                     <a href="{{ url_for('scene_art', scene_id=scene.scene_id) }}" class="text-decoration-none">
-                        <div class="art-card card">
+                        <div class="art-card1 card">
                             <!-- Replace img with a div for the square aspect ratio -->
                             <div class="art-image" style="background-image: url('{{ url_for('static', filename=scene.scene_city_picture) }}');" data-title="{{ scene.scene_city_name }}"></div>
                             <div class="card-body">
@@ -142,7 +105,6 @@
                 </div>
                 {% endfor %}
             {% endif %}
->>>>>>> Stashed changes
         </div>
     </div>
 </div>

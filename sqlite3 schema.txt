@@ -1,4 +1,17 @@
-
+CREATE TABLE Art (
+art_id INTEGER PRIMARY KEY AUTOINCREMENT,
+title TEXT NOT NULL,
+image_url TEXT,
+description TEXT,
+materials TEXT,
+genres TEXT,
+print_size_a5 TEXT,
+print_size_a4 TEXT,
+print_size_a3 TEXT,
+a5_price INTEGER,                                    
+a4_price INTEGER,
+a3_price INTEGER
+);
 
 
 
@@ -35,7 +48,7 @@ media_link1 TEXT,
 media_link2 TEXT,
 media_link3 TEXT,
 media_link4 TEXT,
-scene_id INTEGER,
+scene_id INTEGER
 );
 
 
@@ -71,21 +84,6 @@ FOREIGN KEY (art_id) REFERENCES Art(art_id)
 );
 
 
-
-CREATE TABLE Art (
-art_id INTEGER PRIMARY KEY AUTOINCREMENT,
-title TEXT NOT NULL,
-image_url TEXT,
-description TEXT,
-materials TEXT,
-genres TEXT,
-print_size_a5 TEXT,
-print_size_a4 TEXT,
-print_size_a3 TEXT,
-a5_price INTEGER,                                    
-a4_price INTEGER,
-a3_price INTEGER
-);
 
 
 CREATE TABLE ShoppingSession (

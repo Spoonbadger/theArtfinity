@@ -50,7 +50,7 @@ when you click on a city it takes you to a random selection of art from that cit
     <div class="row">
         {% for scene in scenes %}
         <div class="col-md-4 mb-4">
-        <div class="art-card card">
+        <div class="art-card1 card">
             <img src="{{ url_for('static', filename=scene.scene_city_picture) }}" class="card-img-top" alt="{{ scene.scene_city_name }}">
             <div class="card-body">
             <h5 class="card-title">{{ scene.scene_city_name }}</h5>

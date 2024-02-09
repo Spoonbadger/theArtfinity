@@ -53,10 +53,10 @@
         {% for art in all_art %}
         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
           <a href="{{ art.url }}" class="text-decoration-none">
-          <div class="art-card card">
+          <div class="art-card1 card">
             <div class="art-image" style="background-image: url('{{ url_for('static', filename=art.image_url) }}');" data-title="{{ art.artist_name }}"></div>
             <div class="card-body">
-              <p class="card-title">{{ art.title }}</p>
+              <p class="card-title black-font">{{ art.title }}</p>
             </div>
           </div>
           </a>

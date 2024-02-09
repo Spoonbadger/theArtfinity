@@ -495,7 +495,7 @@ nav .navbar-brand .pink {
 
 
 /* ART CARDS */
-.art-card {
+.art-card1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -541,3 +541,91 @@ nav .navbar-brand .pink {
     color: black; /* Change the text color to black */
     text-decoration: none; /* Optional: Removes the underline from links */
 }
+
+
+/* CAROUSEL */
+.art-card {
+    position: relative;
+    width: 100%; /* Adjust width as necessary, or use Bootstrap grid classes */
+    padding-top: 100%; /* For square aspect ratio */
+    background-size: cover;
+    background-position: center center;
+    margin-bottom: 15px; /* Optional margin for spacing */
+  }
+  
+  .art-image-carousel {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  .art-card .overlay {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    color: #fff;
+    text-align: center;
+    opacity: 0; /* Hide the overlay by default */
+    transition: opacity 0.5s ease;
+    padding: 10px 0;
+  }
+  
+  .art-card:hover .overlay {
+    opacity: 1; /* Show the overlay on hover */
+  }
+
+
+
+
+
+
+/* Carousel indicators */
+.carousel-control-prev, .carousel-control-next {
+    width: 50px; /* Adjust the width as needed */
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-image: none; /* Remove the default background images */
+}
+
+.carousel-control-prev-icon:after, .carousel-control-next-icon:after {
+    content: ''; /* Add your custom arrow icon here, e.g., using a background image */
+    font-family: 'BootstrapIcons'; /* Example for using a font icon */
+    font-size: 30px; /* Adjust the size as needed */
+}
+
+.carousel-control-prev-icon:after {
+    content: '\2039'; /* Example content for left arrow (use your own icon) */
+}
+
+.carousel-control-next-icon:after {
+    content: '\203a'; /* Example content for right arrow (use your own icon) */
+}
+
+.carousel-control-prev, .carousel-control-next {
+    top: 0;
+    bottom: 0;
+    align-items: center; /* Vertically center the arrows */
+    justify-content: center; /* This applies if you're using flexbox */
+    opacity: 1; /* Make sure arrows are always visible */
+}
+
+.carousel-control-prev {
+    left: 0;
+}
+
+.carousel-control-next {
+    right: 0;
+}
+
+
+
+  
+  
+  

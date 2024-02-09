@@ -6,17 +6,21 @@
 
 {% block main %}
 
+
+
+
 <div class="container-parent">
-    <div class="container-column-third">
-        <div class="profile-image">
-            <img src="/IMAGES/generic-artist-profile-picture.jpg">
-            <div class="add-picture-overlay">
-                <span id="profile-picture-input" name="profile_picture" accept="image/*" style="display: none;"></span>
-            </div>
-        </div>    
+    <!-- Profile picture and bio container -->    
+    <div class="container-parent">
         <div class="container-column-third">
+            <div class="profile-image">
+                {% if profile_picture_url %}
+                <img src="{{ url_for('static', filename=profile_picture_url) }}" alt="Profile Picture" class="profile-pic">
+                {% else %}
+                <img src="{{ url_for('static', filename='placeholder-img.jpg') }}" alt="Placeholder Image" class="profile-pic">
+                {% endif %}
+            </div>
         </div>
-    </div>
 
     <div class="column-two-thirds">
         <form class="row g-5" method="GET">
@@ -45,59 +49,10 @@
                 </div>
             </div>
 
-            <div>
-                <div class="col-md-5">
-                    <div class="input-group">
-                        <span class="form-control" id="email"  name="email" aria-describedby="inputGroupPrepend2">{{ artist_info.email }}</span>
-                    </div>
-                </div>
-            </div>
         </form>
     </div>
 </div>
-<div class="py-0"></div>
 
 
-<!-- NEXT IS ADD THE ART BELOW IN ROWS OF FOUR WITH PADDING-->
-<div class="artbox-div">
-    <div class="art-row">
-        <div class="art-col">
-            1c
-        </div>
-        <div class="art-col">
-            2c
-        </div>
-        <div class="art-col">
-            3c
-        </div>
-        <div class="art-col">
-            sfcg
-        </div>
-        <div class="art-col">
-            23c
-        </div>
-        <div class="art-col">
-            fsc
-        </div>
-        <div class="art-col">
-            1c
-        </div>
-        <div class="art-col">
-            2c
-        </div>
-        <div class="art-col">
-            3c
-        </div>
-        <div class="art-col">
-            sfcg
-        </div>
-        <div class="art-col">
-            23c
-        </div>
-        <div class="art-col">
-            fsc
-        </div>
-    </div>
-</div>
 
 {% endblock %}

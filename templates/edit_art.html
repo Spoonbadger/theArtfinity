@@ -5,6 +5,140 @@
 {% endblock %}
 
 {% block main %}
-    
+<div class="container-parent">
+    <form class="row g-4" enctype="multipart/form-data" id="upload_form" method="POST">
+        <!-- Container for the image upload -->
+        <div class="container-half d-flex justify-content-center">
+            <div class="profile-image" style="position: relative; cursor: pointer;">
+                <!-- Single image for both placeholder and preview -->
+                <img id="imagePreview" src="{{ url_for('static', filename='placeholder-img.jpg') }}" alt="Upload Image" class="img-preview" style="width: 100%; height: auto; object-fit: contain;">
+                
+                <!-- Invisible file input for selecting an image -->
+                <input type="file" id="image_url" name="image_url" accept="image/*" style="display: none;" onchange="readURL(this);">
+                
+                <!-- Overlay Text - Optional -->
+                <div class="add-picture-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: rgba(0,0,0,0.3); color: white; font-size: 20px; display: none;">
+                    Click to upload your art
+                </div>
+            </div>
+            <script>
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            document.getElementById('imagePreview').src = e.target.result;
+                            document.getElementById('imagePreview').style.display = 'block';
+                        };
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+                document.getElementById('imagePreview').onclick = function() {
+                    document.getElementById('image_url').click();
+                };
+            </script>
+        </div>
+            
+
+        <div class="container-half" style="text-align: left;">
+            <div class="row g-4" enctype="multipart/form-data" id="" method="POST">
+                <div>
+                    <div class="col-md-7">
+                        <label for="name" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="artwork title" required>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-7">
+                        <label for="materials" class="form-label">Materals</label>
+                        <input type="text" class="form-control" id="materials" name="materials" placeholder="e.g. oil on canvas" required>
+                    </div>
+                </div>
+                <div>               
+                    <div class="col-md-7">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea type="text" class="form-control" id="description" name="description" required></textarea>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-7">
+                        <label for="genres" class="form-label">Genre(s)</label>
+                        <input type="text" class="form-control" id="genres" name="genres" required>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-7">
+                        <label for="genres" class="form-label">Original size (inches)</label>
+                        <input type="text" class="form-control" id="original_size" name="original_size" placeholder="e.g. 8.5 x 11" required>
+                    </div>
+                </div>
+                <div>
+                    <label for="print_sizes" class="form-label">Print size options for sale</label>
+                </div>
+                <div class="col-3 form-check" style="padding-left: 35px;">
+                    <input class="form-check-input" type="checkbox" value="4.25 x 5.5" id="print_size_a5" name="print_size_a5">
+                    <label class="form-check-label" for="size1">4.25 x 5.5</label>
+                </div>
+                <div class="col-3 form-check" style="padding-left: 30px;">
+                    <input class="form-check-input" type="checkbox" value="8.5 x 11" id="print_size_a4" name="print_size_a4">
+                    <label class="form-check-label" for="size2">8.5 x 11</label>
+                </div>
+                <div class="col-3 form-check" >
+                    <input class="form-check-input" type="checkbox" value="11 x 17" id="print_size_a3" name="print_size_a3">
+                    <label class="form-check-label" for="size3">11 x 17</label>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="a5_price" class="form-label">Price</label>
+                        <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="a5_price" min="14.99" name="a5_price" value="14.99" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="a4_price" class="form-label" style="visibility: hidden;">8.5 x 11 Price</label>
+                        <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="a4_price" min="24.99" name="a4_price" value="24.99" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="a3_price" class="form-label" style="visibility: hidden;">11 x 17 Price</label>
+                        <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="a3_price" min="39.99" name="a3_price" value="39.99" required>
+                        </div>
+                    </div>
+                </div>
+                          
+
+
+                <script>
+                    document.getElementById("upload_form").addEventListener("submit", function(event) {
+                        var a5_price = parseFloat(document.getElementById("a5_price").value);
+                        var a4_price = parseFloat(document.getElementById("a4_price").value);
+                        var a3_price = parseFloat(document.getElementById("a3_price").value);
+                        
+                        if (a5_price < 14.99 || a4_price < 24.99 || a3_price < 39.99) {
+                            event.preventDefault(); // Prevent form submission
+                            alert("Prices must be at least $14.99, $24.99, and $39.99 respectively.");
+                        }
+                    });
+                </script>
+                    
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                    <label class="form-check-label" for="invalidCheck2">
+                    Agree to <a href="/ts_and_cs">terms and conditions</a>
+                    </label>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-primary col-md-3" type="submit">Upload</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

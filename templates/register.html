@@ -6,7 +6,7 @@
 
 {% block main %}
     <form action="/register" class="needs-validation" novalidate method="post">
-        <form class="row g-3">
+        <div class="row g-3" style="padding-left: 15%; padding-right: 15%;">
             <div class="col-md-4">
               <label for="first_name" class="form-label">First name</label>
               <input type="text" class="form-control" id="first_name" placeholder="Frida" required>
@@ -21,6 +21,7 @@
                 <input type="text" class="form-control" id="artist_name"  aria-describedby="inputGroupPrepend2" placeholder="Frida Basquiat" required>
               </div>
             </div>
+          <div class="row g-3 justify-content-around">
             <div class="col-md-3">
               <label for="city" class="form-label">City</label>
               <input type="text" class="form-control" id="city" required>
@@ -36,17 +37,18 @@
               <label for="zip" class="form-label">Zip</label>
               <input type="text" class="form-control" id="zip" required>
             </div>
+          </div>
             <div class="col-12">
-              <div class="form-check">
+              <div class="form-check" style="padding-left: 40%;">
                 <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-                <label class="form-check-label" for="invalidCheck2">
+                <label class="form-check-label text-align: start;" for="invalidCheck2">
                   Agree to terms and conditions
                 </label>
               </div>
             </div>
 
-            <div class="form-floating mb-3">
-              <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="email" name="email" required type="email">
+            <div class="form-floating">
+              <input autocomplete="off" autofocus class="form-control mx-auto w-auto mb-5" id="email" name="email" required type="email">
               <label for="email">email</label>
           </div>
 
@@ -67,6 +69,6 @@
                   </div>
           </div>
           <button class="btn btn-primary" type="submit">Register</button>
-        </form>
+        </div>
     </form>
 {% endblock %}

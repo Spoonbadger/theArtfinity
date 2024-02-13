@@ -28,10 +28,10 @@
     </div>
     <!-- Carousel items -->
     <div id="artCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            {% for chunk in all_art|batch(6, '&nbsp;') %}
+        <div class="carousel-inner mt-0">
+            {% for chunk in all_art|batch(5, '&nbsp;') %}
             <div class="carousel-item {% if loop.first %}active{% endif %}">
-              <div class="d-flex justify-content-center flex-wrap row g-4">
+              <div class="d-flex justify-content-center flex-wrap row g-5">
                 {% for art in chunk %}
                 <div class="col-2">
                   <a href="{{ art.url }}" class="text-decoration-none">
@@ -58,29 +58,46 @@
       </div>
       
   
-<div style="text-align: left; padding-left: 60px">
-    <h4>Artists</h4>
-</div>
-<div class="container-parent mb-5">
-    <div class="container-fluid mt-0 mb-5">
-        <div class="row g-4 mt-0 mb-5">
-        {% if users %}
-            {% for user in users[:6] %}
-            <div class="col-lg-2 col-md-4 col-sm-6 col-6">
-                <a href="{{ url_for('artist_profile', artist_name=user.artist_name) }}" class="text-decoration-none">
-                    <div class="art-card1 card">
-                        <div class="art-image" style="background-image: url('{{ url_for('static', filename=user.profile_picture_url if user.profile_picture_url else 'default-profile.jpg') }}');" data-title="{{ user.artist_name }}"></div>
-                        <div class="card-body">
-                            <h5 class="card-title black-font">{{ user.artist_name }}</h5>
-                        </div>
+      <div style="text-align: left; padding-left: 60px">
+        <h4>Artists</h4>
+    </div>
+    <div id="artistsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+            {% for user in users|batch(4, '&nbsp;') %}
+            <button type="button" data-bs-target="#artistsCarousel" data-bs-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ loop.index }}"></button>
+            {% endfor %}
+        </div>
+        <!-- Carousel items -->
+        <div class="carousel-inner mb-5 mt-0">
+            {% for chunk in users|batch(4, '&nbsp;') %}
+            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                <div class="d-flex justify-content-center flex-wrap row g-5">
+                    {% for user in chunk %}
+                    <div class="col-3"> <!-- Adjusted for 4 artists per row -->
+                        <a href="{{ url_for('artist_profile', artist_name=user.artist_name) }}" class="text-decoration-none">
+                            <div class="art-card" style="max-height: 50px; max-width: 250px; margin: auto;">
+                                <div class="art-image-carousel" style="background-image: url('{{ url_for('static', filename=user.profile_picture_url if user.profile_picture_url else 'default-profile.jpg') }}');" data-title="{{ user.artist_name }}"></div>
+                                <div class="overlay">{{ user.artist_name }}</div>
+                            </div>
+                        </a>
                     </div>
-                </a>
+                    {% endfor %}
+                </div>
             </div>
             {% endfor %}
-        {% endif %}
         </div>
+        <!-- Carousel controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#artistsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#artistsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-</div>
+    
 
 <div style="text-align: left; padding-left: 60px">
     <h4>City Art Scenes</h4>

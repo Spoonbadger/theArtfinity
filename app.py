@@ -58,8 +58,8 @@ def index():
         # Possible future problem with an artist if they have a double barrel name
         art['url'] = f"/art/{slugged_artist_name}/{slugged_title}"
         
-    users = db.execute("SELECT user_id, username, artist_name, profile_picture_url FROM Users ORDER BY RANDOM() LIMIT 6")
-    scenes = db.execute("SELECT * FROM Scenes ORDER BY RANDOM() LIMIT 6")
+    users = db.execute("SELECT user_id, username, artist_name, profile_picture_url FROM Users ORDER BY RANDOM() LIMIT 20")
+    scenes = db.execute("SELECT * FROM Scenes")
 
     return render_template("home.html", all_art=all_art or [], scenes=scenes or [], users=users or [])
 
@@ -89,9 +89,6 @@ def all_artworks():
 def artwork(artist_name, art_title):
     search_artist_name = artist_name.replace("-", " ").replace("_", " ")
     search_title = art_title
-
-    print("Artist name:", search_artist_name)
-    print("Art title:", search_title)
 
     query = """
         SELECT Art.*, Users.username, Users.artist_name
@@ -130,16 +127,55 @@ def artists():
 
 
 
+
+
 @app.route("/artists/<artist_name>")
 def artist_profile(artist_name):
-    artist_info = db.execute("SELECT * FROM Users WHERE artist_name = :artist_name", artist_name=artist_name)
-    artist_info = artist_info[0]
+    if request.method == "GET":
+        # Adjusts artist_name for search.
+        search_artist_name = artist_name.replace("-", " ").replace("_", " ")
 
-    if not artist_info:
-        return "Artist not found", 404
+        # Query to get the artist's details.
+        artist_query = """
+            SELECT * FROM Users
+            WHERE LOWER(artist_name) LIKE LOWER(?)
+        """
+        artist_info = db.execute(artist_query, "%" + search_artist_name + "%")
 
-    return render_template("artist_profile.html", artist_info=artist_info)
-    
+        if artist_info:
+            # Access the first item from the result list to get the artist's details dictionary.
+            artist_info = artist_info[0]  # This assumes at least one result is returned.
+
+            # Now, with the correct dictionary access, fetch artworks using the artist's user_id.
+            artworks_query = """
+                SELECT Art.* FROM Art
+                INNER JOIN UserArt ON Art.art_id = UserArt.art_id
+                WHERE UserArt.user_id = ?
+            """
+            # Execute query with the correct parameter.
+            art_details = db.execute(artworks_query, artist_info['user_id'])
+
+            # Pass both the artist details and their artworks to the template.
+            return render_template("artist_profile.html", artist_info=artist_info, art_details=art_details)
+        else:
+            return "Artist not found", 404
+    else:
+        all_art = db.execute("""
+            SELECT Art.title, Art.image_url, Users.artist_name
+            FROM Art
+            JOIN UserArt ON Art.art_id = UserArt.art_id
+            JOIN Users ON UserArt.user_id = Users.user_id
+            ORDER BY RANDOM()
+        """)
+        # Process each artwork to include a URL path or complete URL
+        for art in all_art:
+            slugged_title = (art['title'])
+            slugged_artist_name = slugify(art['artist_name'])
+            # Construct the path or URL here
+            # Possible future problem with an artist if they have a double barrel name
+            art['url'] = f"/art/{slugged_artist_name}/{slugged_title}"
+
+        return render_template("artwork.html", all_art=all_art)
 
 
 
@@ -185,6 +221,19 @@ def delete_art(art_id):
 
     # Redirect back to the profile page or another appropriate page
     return redirect(url_for('profile'))
+
+
+@app.route("/edit_art/<art_title>", methods=["GET", "POST"])
+def edit_art(art_title):
+    if 'user_id' not in session:
+        return redirect(url_for("login"))
+        user_id = session['user_id']
+
+    search_title = art_title
+
+    return render_template("edit_art.html")
+
+
 
 
 @app.route("/edit_profile", methods=["GET", "POST"])
@@ -353,42 +402,53 @@ def profile():
     if request.method == "GET":
         if 'user_id' in session:
             user_id = session['user_id']
+        # Adjusts artist_name for search.
+        search_artist_name = db.execute("SELECT artist_name FROM Users WHERE user_id = ?", user_id)
+        search_artist_name = search_artist_name[0]['artist_name']
 
-            # Fetch the profile picture URL from the database
-            profile_picture_result = db.execute("SELECT profile_picture_url FROM Users WHERE user_id = ?", (user_id,))
-            
-            if profile_picture_result:
-                profile_picture_url = profile_picture_result[0]['profile_picture_url']
-            else:
-                profile_picture_url = None  # Default or placeholder image URL
+        print(search_artist_name)
 
-            user_info = db.execute("SELECT * FROM Users WHERE user_id = ?", (user_id,))
+        # Query to get the artist's details.
+        artist_query = """
+            SELECT * FROM Users
+            WHERE LOWER(artist_name) LIKE LOWER(?)
+        """
+        artist_info = db.execute(artist_query, "%" + search_artist_name + "%")
 
-            # Fetch user information and their associated scene information
-            user_info_result = db.execute("""
-                SELECT Users.*, Scenes.scene_city_name, Scenes.scene_city_picture, Scenes.scene_city_description 
-                FROM Users
-                LEFT JOIN Scenes ON Users.scene_id = Scenes.scene_id
-                WHERE Users.user_id = ?
-                """, (user_id,))
-            user_info = user_info_result if user_info_result else None
+        if artist_info:
+            # Access the first item from the result list to get the artist's details dictionary.
+            artist_info = artist_info[0]  # This assumes at least one result is returned.
 
-            # Fetch art associated with the user through UserArt
-            user_artworks = db.execute("""
-                SELECT Art.* 
-                FROM Art 
-                JOIN UserArt ON Art.art_id = UserArt.art_id 
+            # Now, with the correct dictionary access, fetch artworks using the artist's user_id.
+            artworks_query = """
+                SELECT Art.* FROM Art
+                INNER JOIN UserArt ON Art.art_id = UserArt.art_id
                 WHERE UserArt.user_id = ?
-                """, (user_id,))
+            """
+            # Execute query with the correct parameter.
+            art_details = db.execute(artworks_query, artist_info['user_id'])
 
-            if user_info:
-                return render_template("profile.html", art_scene_options=art_scene_options, user_info=user_info, profile_picture_url=profile_picture_url, user_artworks=user_artworks, state_options=state_options)
-            else:
-                # Handle case when user_info is not found
-                return apology("User information not found", 404)
-            
+            # Pass both the artist details and their artworks to the template.
+            return render_template("profile.html", artist_info=artist_info, art_details=art_details)
         else:
-            return redirect("login.html")
+            return "Artist not found", 404
+    else:
+        all_art = db.execute("""
+            SELECT Art.title, Art.image_url, Users.artist_name
+            FROM Art
+            JOIN UserArt ON Art.art_id = UserArt.art_id
+            JOIN Users ON UserArt.user_id = Users.user_id
+            ORDER BY RANDOM()
+        """)
+        # Process each artwork to include a URL path or complete URL
+        for art in all_art:
+            slugged_title = (art['title'])
+            slugged_artist_name = slugify(art['artist_name'])
+            # Construct the path or URL here
+            # Possible future problem with an artist if they have a double barrel name
+            art['url'] = f"/art/{slugged_artist_name}/{slugged_title}"
+
+        return render_template("artwork.html", all_art=all_art)
 
 
 

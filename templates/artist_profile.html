@@ -6,53 +6,61 @@
 
 {% block main %}
 
-
-
-
 <div class="container-parent">
     <!-- Profile picture and bio container -->    
-    <div class="container-parent">
-        <div class="container-column-third">
+    <div class="container-parent row">
+        <div class="container-column-third d-flex align-items-right" style="display: flex; align-items: right;">
             <div class="profile-image">
-                {% if profile_picture_url %}
-                <img src="{{ url_for('static', filename=profile_picture_url) }}" alt="Profile Picture" class="profile-pic">
-                {% else %}
-                <img src="{{ url_for('static', filename='placeholder-img.jpg') }}" alt="Placeholder Image" class="profile-pic">
-                {% endif %}
+                <img src="{{ url_for('static', filename=artist_info.profile_picture_url) }}" alt="Profile Picture" class="profile-pic">
             </div>
         </div>
-
-    <div class="column-two-thirds">
-        <form class="row g-5" method="GET">
-            <div>
-                <div class="col-md-5">
-                    <div class="input-group">
-                        <span class="form-control" id="artist_name"  name="artist_name" aria-describedby="inputGroupPrepend2">{{ artist_info.artist_name }}</span>
+        <!-- Contains name, city, and below a bio -->
+        <div class="column-two-thirds" style="position: relative;">
+            <!-- Name and city -->
+            <div class="row g-5">
+                <!-- Name -->
+                <div class="col-12 mt-0 text-start" style="padding-left: 5%">
+                    <span id="artist_name"  name="artist_name" aria-describedby="inputGroupPrepend2"><h1>{{ artist_info.artist_name }}</h1></span>
+                </div>
+            <!-- Bio -->
+            <div class="row mt-4">
+                    <div class="col-8 input-group">
+                        <span class="text-start" id="long_bio" name="long_bio" aria-describedby="inputGroupPrepend2" style="margin-left: 50px">{{ artist_info.long_bio }}</span>
+                    </div>
+                </div>
+            <div class="row" style="position: absolute; bottom: 0; left: 0;">
+                <p class="col-8 text-start" style="padding-left: 3%;">Based in: {{ artist_info.city }}</p>
+                <!-- Phase 2
+                <div class="col-3 text-start">
+                    {{ artist_info.media_link1 }}
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+    <!-- Display artworks -->
+    <div class="container mt-5">
+        <div class="row g-5">
+            {% for art in art_details %}
+            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                <div class="art-card1 card">
+                    <!-- Wrap the <img> tag with an <a> tag leading to the artwork's specific page -->
+                    <a href="{{ url_for('artwork', artist_name=artist_info.artist_name|slugify, art_title=art.title) }}">
+                        <img src="{{ url_for('static', filename=art.image_url) }}" class="card-img-top" alt="{{ art.title }}">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ art.title }}</h5>
                     </div>
                 </div>
             </div>
-            <div>
-                <div class="col-md-5">
-                    <span class="form-control" id="city" name="city">{{ artist_info.city }}</span>
-                </div>
-            </div>
-            <div>
-                <div class="col-md-5">
-                    <span class="form-control" id="country" name="country">{{ artist_info.country }}</span>
-                </div>
-            </div>
-            <div>
-                <div class="col-md-8">
-                    <div class="input-group">
-                        <span class="form-control" id="long_bio"  name="long_bio" aria-describedby="inputGroupPrepend2">{{ artist_info.long_bio }}</span>
-                    </div>
-                </div>
-            </div>
-
-        </form>
+            {% endfor %}
+            
+        </div>
     </div>
 </div>
 
 
 
 {% endblock %}
+
+

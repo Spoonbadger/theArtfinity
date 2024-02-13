@@ -186,7 +186,7 @@
 
 .container-parent {
     box-sizing: border-box;
-    display: flex;
+    width: 100%;
     }
     
 .container-column {
@@ -197,7 +197,7 @@
 .container-half {
     box-sizing: border-box;
     display: flex;
-    width: 50%;
+    width: 45%;
 }
 
 .container-third {
@@ -228,6 +228,7 @@
 
 
 .flex-parent {
+    box-sizing: border-box;
     display: flex;
     width: 100%;
 }
@@ -372,6 +373,14 @@ nav .navbar-brand .pink {
     color: #D88;
 }
 
+.background-color {
+    color: #867937;
+}
+
+.text-color {
+    color: #691414;
+}
+
 .parent-div {
     /* background-color: */
     box-sizing: border-box;
@@ -490,6 +499,34 @@ nav .navbar-brand .pink {
 }
 
 
+.artwork-image {
+    margin: 0 auto; /* Center the div */
+    width: 620px; /* Example fixed width */
+    height: 620px; /* Example fixed height */
+    overflow: hidden;
+    position: relative;
+    display: flex; /* Use flex to center the child img */
+    justify-content: center; /* Center horizontally for flex items */
+    align-items: top; /* Center vertically for flex items */
+}
+
+.artwork-image img {
+    max-width: 100%; /* Ensure the image is not wider than its container */
+    max-height: 100%; /* Ensure the image is not taller than its container */
+    object-fit: cover; /* Cover the area of the container without losing aspect ratio */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .artwork-image {
+        width: 100%; /* Take full width of the parent container */
+        height: auto; /* Height auto for maintaining aspect ratio */
+    }
+}
+
+
+
+
 /* ART CARDS */
 .art-card1 {
     display: flex;
@@ -499,6 +536,7 @@ nav .navbar-brand .pink {
     overflow: hidden;
     position: relative;
   }
+
   
   .art-image {
     width: 100%;
@@ -546,7 +584,7 @@ nav .navbar-brand .pink {
     padding-top: 100%; /* For square aspect ratio */
     background-size: cover;
     background-position: center center;
-    margin-bottom: 15px; /* Optional margin for spacing */
+    margin-bottom: 0px; /* Optional margin for spacing */
   }
   
   .art-image-carousel {
@@ -576,6 +614,7 @@ nav .navbar-brand .pink {
     opacity: 1; /* Show the overlay on hover */
   }
 
+  
 
 
 
@@ -583,7 +622,7 @@ nav .navbar-brand .pink {
 
 /* Carousel indicators */
 .carousel-control-prev, .carousel-control-next {
-    width: 50px; /* Adjust the width as needed */
+    width: 120px; /* Adjust the width as needed */
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
@@ -592,8 +631,9 @@ nav .navbar-brand .pink {
 
 .carousel-control-prev-icon:after, .carousel-control-next-icon:after {
     content: ''; /* Add your custom arrow icon here, e.g., using a background image */
+    color: lightgray;
     font-family: 'BootstrapIcons'; /* Example for using a font icon */
-    font-size: 30px; /* Adjust the size as needed */
+    font-size: 40px; /* Adjust the size as needed */
 }
 
 .carousel-control-prev-icon:after {

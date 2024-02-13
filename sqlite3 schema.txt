@@ -48,7 +48,8 @@ media_link1 TEXT,
 media_link2 TEXT,
 media_link3 TEXT,
 media_link4 TEXT,
-scene_id INTEGER
+scene_id INTEGER,
+artist_name TEXT
 );
 
 

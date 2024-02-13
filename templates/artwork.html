@@ -6,40 +6,27 @@
 
 {% block main %}
 
-    <!-- mini-nav-bar for the art -->
-    <div class="container-parent">
-        <nav>
-            <ol 'alignedleft'>
-                <ul>
 
-                </ul>
-                <ul>
-
-                </ul>
-                <ul>
-
-                </ul>
-            </ol>
-            <div>
-                <a>
-                    <span></span><span></span>
-                </a>
-                <a>
-                    <span></span><span></span>
-                </a>
+<div class="container-fluid mt-3">
+    <div class="row justify-content-around">
+        <!-- Artwork Image Container -->
+        <div class="col-6">
+            <div class="artwork-image" style="align-items: flext-start">
+                <img src="{{ image_url }}" alt="{{ art_detail.title }}" class="img-fluid">
             </div>
-        </nav>
+        </div>
+
+        <!-- Artwork Details Container -->
+        <div class="col-6 text-start">
+            <div class="art-details" style="padding-right: 15%">
+                <h1>{{ art_detail.title }}</h1>
+                <h5>by: {{ art_detail.artist_name }}</h5>
+                <br>
+                <p class="text-start">{{ art_detail.description }}</p>
+            </div>
+        </div>
     </div>
-
-    <div class="artwork-detail">
-        <h2>{{ art_detail.title }}</h2>
-        <p>By: {{ art_detail.artist_name }}</p>
-        <img src="{{ image_url }}" alt="{{ art_detail.title }}">
-        <p>{{ art_detail.description }}</p>
-    </div>
-
-    
-
+</div>
 
 
 {% endblock %}

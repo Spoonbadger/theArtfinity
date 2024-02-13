@@ -9,6 +9,7 @@
         <div class="flex-child" style="text-align: left">
           Please browse and choose art of your liking. You can also search by genre, artist, or the title of the piece.
         </div>
+        <h2>All Artworks</h2>
         <div class="flex-child" style="text-align: right; padding-right: 100px">
             <input> <!-- Search bar here-->
             <button class="btn btn-light" type="search">Search</button>
@@ -48,8 +49,7 @@
     </div>
     
     <div class="container-fluid mt-4">
-      <h2>All Artworks</h2>
-      <div class="row g-4">
+      <div class="row g-5">
         {% for art in all_art %}
         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
           <a href="{{ art.url }}" class="text-decoration-none">

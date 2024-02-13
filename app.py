@@ -529,6 +529,11 @@ def scene_art(scene_id):
     return render_template("scene_art.html", art=art, scene_city_name=scene_city_name)
 
 
+@app.route("/ts_and_cs")
+def ts_and_cs():
+
+    return redirect("ts_and_cs.html")
+
 
 @app.route("/upload", methods=["GET", "POST"])
 def upload():

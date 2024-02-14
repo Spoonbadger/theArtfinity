@@ -6,24 +6,35 @@
 
 {% block main %}
 
-<div class="container-parent">
-    <!-- Edit button -->
-    <div class="container-parent" style="position: relative; min-height: 25px; width: 100%;">
-        <div class="edit-button" style="position: absolute; top: 0; right: 0;">
-            <button class="btn btn-light" id="edit_profile" type="button">edit</button>
-        </div>
+<div class="container-parent" style="position: relative; min-height: 25px; width: 100%;">
+    <!-- Buttons container -->
+    <div class="buttons-container" style="position: absolute; top: 0; right: 0;">
+
+        <!-- Edit button -->
+        <button class="btn btn-light" id="edit_profile" type="button">edit</button>
+
+        <!-- Logout button-->
+        <button class="btn btn-light" id="logout" type="button">logout</button>
+
     </div>
-    <script>
-        document.getElementById("edit_profile").addEventListener("click", function() {
-            window.location.href = "/edit_profile";
-        }); 
-    </script>
+</div>
+
+<script>
+    document.getElementById("edit_profile").addEventListener("click", function() {
+        window.location.href = "/edit_profile";
+    });
+
+    document.getElementById("logout").addEventListener("click", function() {
+        window.location.href = "/logout";
+    }); 
+</script>
+
 
     <!-- Profile picture container -->    
     <div class="container-parent row">
         <div class="container-column-third d-flex align-items-right" style="display: flex; align-items: right;">
             <div class="profile-image">
-                <img src="{{ url_for('static', filename=artist_info.profile_picture_url) }}" alt="Profile Picture" class="profile-pic">
+                <img src="{{ url_for('static', filename=artist_info.profile_picture_url|default('IMAGES/artists/generic-artist-profile-picture.jpg', true)) }}" alt="Profile Picture" class="profile-pic">
             </div>
         </div>
         <!-- Contains name, and below, a bio -->
@@ -41,7 +52,9 @@
                     </div>
                 </div>
             <div class="row" style="position: absolute; bottom: 0; left: 0;">
-                <p class="col-8 text-start" style="padding-left: 3%;">Based in: {{ artist_info.city }}</p>
+                {% if artist_info.city and artist_info.city != 'None' %}
+                    <p class="col-8 text-start" style="padding-left: 3%;">Based in: {{ artist_info.city }}</p>
+                {% endif %}
                 <!-- Phase 2
                 <div class="col-3 text-start">
                     {{ artist_info.media_link1 }}
@@ -55,7 +68,7 @@
         <div class="row g-5">
             {% for art in art_details %}
             <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                <div class="art-card1 card">
+                <div class="art-card1">
                     <!-- Wrap the <img> tag with an <a> tag leading to the artwork's specific page -->
                     <a href="{{ url_for('artwork', artist_name=artist_info.artist_name|slugify, art_title=art.title) }}">
                         <img src="{{ url_for('static', filename=art.image_url) }}" class="card-img-top" alt="{{ art.title }}">

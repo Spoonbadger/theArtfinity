@@ -175,8 +175,8 @@
         <div class="row">
           {% for art in user_artworks %}
           <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-            <div class="art-card1 card">
-              <img src="{{ url_for('static', filename=art.image_url) }}" class="card-img-top" alt="Art Piece">
+            <div class="art-card1">
+              <img src="{{ url_for('static', filename=art.image_url|default('IMAGES/artists/generic-artist-profile-picture.jpg', true)) }}" class="card-img-top" alt="Art Piece">
               <div class="card-body">
                 <h5 class="card-title">{{ art.title }}</h5>
                 <p class="card-text" onclick="toggleDescription('fullDescription{{ loop.index }}', event)" style="cursor: pointer;">

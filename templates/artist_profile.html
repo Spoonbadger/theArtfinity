@@ -29,7 +29,9 @@
                     </div>
                 </div>
             <div class="row" style="position: absolute; bottom: 0; left: 0;">
-                <p class="col-8 text-start" style="padding-left: 3%;">Based in: {{ artist_info.city }}</p>
+                {% if artist_info.city and artist_info.city != 'None' %}
+                    <p class="col-8 text-start" style="padding-left: 3%;">Based in: {{ artist_info.city }}</p>
+                {% endif %}
                 <!-- Phase 2
                 <div class="col-3 text-start">
                     {{ artist_info.media_link1 }}

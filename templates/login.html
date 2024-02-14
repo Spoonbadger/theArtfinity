@@ -6,13 +6,13 @@ Login
 
 {% block main %}
 <form action="/login" class="needs-validation" novalidation method="post">
-    <div class="form-floating mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="email" name="email" required type="email">
+    <div class=" mb-3">
         <label for="email">Email address</label>
+        <input autocomplete="off" autofocus class="form-control mx-auto w-25" id="email" name="email" required type="email">
     </div>
-    <div class="form-floating" mb-3>
-        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="password" name="password" required type="password">
+    <div class="mb-5">
         <label for="password">Password</label>
+        <input autocomplete="off" autofocus class="form-control mx-auto w-25" id="password" name="password" required type="password">
     </div>
     <button class="btn btn-primary" type="submit">Login</button>
 </form>

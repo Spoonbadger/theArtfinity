@@ -58,8 +58,8 @@ def index():
         # Possible future problem with an artist if they have a double barrel name
         art['url'] = f"/art/{slugged_artist_name}/{slugged_title}"
         
-    users = db.execute("SELECT user_id, username, artist_name, profile_picture_url FROM Users ORDER BY RANDOM() LIMIT 20")
-    scenes = db.execute("SELECT * FROM Scenes")
+    users = db.execute("SELECT user_id, username, artist_name, profile_picture_url FROM Users ORDER BY RANDOM() LIMIT 25")
+    scenes = db.execute("SELECT * FROM Scenes ORDER BY scene_city_name")
 
     return render_template("home.html", all_art=all_art or [], scenes=scenes or [], users=users or [])
 
@@ -120,11 +120,13 @@ def artwork(artist_name, art_title):
 @app.route("/artists")
 def artists():
     # Fetch all users' profile picture URLs and other relevant info from the database
-    users = db.execute("SELECT user_id, username, artist_name, profile_picture_url FROM Users ORDER BY artist_name")
+    users = db.execute("SELECT user_id, artist_name, profile_picture_url FROM Users ORDER BY RANDOM() LIMIT 6")
+
+    artists = db.execute("SELECT user_id, artist_name, profile_picture_url FROM Users ORDER BY artist_name")
+    print(artists)
 
     # Render the template, passing the users data
-    return render_template("artists.html", users=users)
-
+    return render_template("artists.html", artists=artists, users=users)
 
 
 
@@ -406,7 +408,6 @@ def profile():
         search_artist_name = db.execute("SELECT artist_name FROM Users WHERE user_id = ?", user_id)
         search_artist_name = search_artist_name[0]['artist_name']
 
-        print(search_artist_name)
 
         # Query to get the artist's details.
         artist_query = """
@@ -418,6 +419,9 @@ def profile():
         if artist_info:
             # Access the first item from the result list to get the artist's details dictionary.
             artist_info = artist_info[0]  # This assumes at least one result is returned.
+
+            if not artist_info.get('profile_picture_url'):
+                artist_info['profile_picture_url'] = 'default_profile.jpg'
 
             # Now, with the correct dictionary access, fetch artworks using the artist's user_id.
             artworks_query = """
@@ -466,7 +470,13 @@ def register():
         if not request.form.get("password_confirmation"):
             return apology("must provide password confirmation", 404)
 
-        # Define varaibles
+        # Define variables
+        first_name = request.form.get("first_name")
+        last_name = request.form.get("last_name")
+        artist_name = request.form.get("artist_name")
+        city = request.form.get("city")
+        state = request.form.get("state")
+        zip_code = request.form.get("zip_code")
         email = request.form.get("email")
         password = request.form.get("password")
         password_confirmation = request.form.get("password_confirmation")
@@ -490,8 +500,8 @@ def register():
     # Hash the password
         hashpassword = generate_password_hash(password)
 
-    # Submit email and password to the database
-        db.execute("INSERT INTO Users (email, hash) VALUES (?, ?)", email, hashpassword)
+    # Submit email and password to the database AND  first, last, artist_name, city, state, zip_code, 
+        db.execute("INSERT INTO Users (email, hash, first_name, last_name, artist_name, city, state, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", email, hashpassword, first_name, last_name, artist_name, city, state, zip_code)
 
     # Remember which user has logged in
         new_user = db.execute("SELECT user_id FROM Users WHERE email = ?", email)
@@ -515,9 +525,9 @@ def scenes():
 
 @app.route("/scene_art/<int:scene_id>")
 def scene_art(scene_id):
-
-    art = db.execute("""
-        SELECT Art.* FROM Art
+    # Fetch artworks for the specified scene in random order
+    scene_artworks = db.execute("""
+        SELECT Art.*, Users.artist_name FROM Art
         JOIN UserArt ON Art.art_id = UserArt.art_id
         JOIN Users ON UserArt.user_id = Users.user_id
         WHERE Users.scene_id = ? ORDER BY RANDOM()
@@ -526,13 +536,24 @@ def scene_art(scene_id):
     scene_city_dict = db.execute("SELECT scene_city_name FROM Scenes WHERE scene_id = ?", scene_id)
     scene_city_name = scene_city_dict[0]['scene_city_name']
 
-    return render_template("scene_art.html", art=art, scene_city_name=scene_city_name)
+    selected_art = scene_artworks
+    print(selected_art)
+
+    # Process each artwork to include a URL path or complete URL
+    for artwork in selected_art:
+        slugged_title = artwork['title']
+        slugged_artist_name = slugify(artwork['artist_name'])  # Make sure this is actually slugified
+        artwork['url'] = f"/art/{slugged_artist_name}/{slugged_title}"
+
+
+    # Correctly pass distinct lists to the template
+    return render_template("scene_art.html", scene_artworks=scene_artworks, selected_art=selected_art, scene_city_name=scene_city_name)
 
 
 @app.route("/ts_and_cs", methods=["GET", "POST"])
 def ts_and_cs():
     if request.method == "GET":
-        
+
         return render_template("ts_and_cs.html")
 
 

@@ -5,24 +5,42 @@
 {% endblock %}
 
 {% block main %}
-
-<div class="container mt-5">
-    <h2>Art from the Scene</h2>
-    <div class="row">
-        {% for artwork in art %}
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <!-- Assuming Art table has image_url, title, and description columns -->
-                <img src="{{ url_for('static', filename=artwork.image_url) }}" class="card-img-top" alt="{{ artwork.title }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ artwork.title }}</h5>
-                    <p class="card-text">{{ artwork.description }}</p>
-                    <!-- Additional details can go here -->
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
+<div class="container-fluid mt-4">
+    <!-- Title displaying city name and 'Art Scene' -->
+    <h2>{{ scene_city_name }} Art Scene</h2>
 </div>
+<div class="container-fluid mt-4">
+    <div class="row g-5">
+      {% for art in selected_art %}
+      <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+        <a href="{{ art.url }}" class="text-decoration-none">
+        <div class="art-card1">
+          <div class="art-image" style="background-image: url('{{ url_for('static', filename=art.image_url) }}');" data-title="{{ art.artist_name }}"></div>
+          <div class="card-body">
+            <p class="card-title black-font">{{ art.title }}</p>
+          </div>
+        </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 
+
+<script>
+    function toggleDescription(descriptionId, event) {
+      const fullDescription = document.getElementById(descriptionId);
+      // Check if the full description is currently shown
+      if (fullDescription.classList.contains('collapse')) {
+        // Show the full description
+        fullDescription.classList.remove('collapse');
+        event.target.closest('.card-text').querySelectorAll('span')[0].style.display = 'none'; // Hide the truncated part
+      } else {
+        // Hide the full description and show the truncated part again
+        fullDescription.classList.add('collapse');
+        event.target.closest('.card-text').querySelectorAll('span')[0].style.display = ''; // Show the truncated part
+      }
+    }
+    </script>
+    
 {% endblock %} 

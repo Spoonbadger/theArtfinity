@@ -32,7 +32,7 @@ all links to their profile page -->
         </div>
     </div>
 </div>
-
+    <!-- Add this cool search later 
     <div class="artist-index">
         <div class="index-filter">
             <li letter="A">A</li>
@@ -64,42 +64,19 @@ all links to their profile page -->
             <li letter="all">View All</li>
           </div>
         </div>
-
+    -->
         <!-- Full index of artists in three columns -->
         <div class="artist-index-table-wrapper">
             <ul class="artist-index-table">
-                <li class="artist-index-name" index-letter="B">
-                <a href="/artist/jason-breish">Jason Breish</a>
-                </li>
-                <li class="artist-index-name" index-letter="C">
-                <a href="/artist/claude-monet">Claude Monet</a>
-                </li>
-                <li class="artist-index-name" index-letter="E">
-                    <a href="/artist/egon-schiele">Egon Schiele</a>
-                </li>
-                <li class="artist-index-name" index-letter="G">
-                    <a href="/artist/gustav-klimpt">Gustav Klimpt</a>
-                </li>
-                <li class="artist-index-name" index-letter="J">
-                    <a href="/artist/van-eyck">Jan van Eyck</a>
-                </li>
-                <li class="artist-index-name" index-letter="J">
-                    <a href="/artist/jan-vermeer">Johannes Vermeer</a>
-                </li>
-                <li class="artist-index-name" index-letter="L">
-                    <a href="/artist/rembrandt">Leonardo da Vinci</a>
-                </li>
-                <li class="artist-index-name" index-letter="M">
-                    <a href="/artist/mc-escher">MC Escher</a>
-                </li>
-                <li class="artist-index-name" index-letter="P">
-                    <a href="/artist/piet-mondrian">Piet Mondrian</a>
-                </li>
-                <li class="artist-index-name" index-letter="V">
-                <a href="/artist/van-gogh">Vincent van Gogh</a>
-                </li>
+                {% for artist in artists %}
+                    <li class="artist-index-name" index-letter="{{ artist.artist_name[0].upper() }}">
+                        <a href="{{ url_for('artist_profile', artist_name=artist.artist_name) }}" class="text-decoration-none text-color">{{ artist.artist_name }}</a>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
+
+        
 
 
           <!-- <script>

@@ -24,6 +24,52 @@
                 <br>
                 <p class="text-start">{{ art_detail.description }}</p>
             </div>
+            <!-- TODO: include the size and price options for each piece of artwork and have the buttons be selectable. show the price below. SEE Loupe -->
+            <div class="size-options" style="padding-top: 100px;">
+                <div class="options-selectors">
+                    <div class="option-selector">
+                        <fieldset class="option-selector-fieldset">
+                            <p class="upperclass">
+                                <b>CHOOSE PRINT SIZE</b>
+                            </p>
+                            <div class="option-selector-btns">
+                                <!-- Loop here for available size options -->
+                                    <!-- Only show when info is there -->
+                                <input class="btn-check" checked id="btnradio1" name="btnradio1" type="radio" >
+                                <label class="btn btn-outline-primary" for="btnradio1">8.5 x 11</label>
+                                <input class="btn-check" checked id="btnradio2" name="btnradio1" type="radio" >
+                                <label class="btn btn-outline-primary" for="btnradio2">16 x 20</label>
+                                <input class="btn-check" checked id="btnradio2" name="btnradio1" type="radio" >
+                                <label class="btn btn-outline-primary" for="btnradio2">24 x 36</label>
+                            </div><br>
+                            <i>
+                                Maximum print dimensions above are listed in inches.  Actual print size is based on the original image aspect ratio.<br>
+                                Dimensions: Each print retains the art's original proportion/aspect ratio within the selected print size. <br>
+                                The print has a 1/2 inch handling border.
+                            </i>
+                        </fieldset><br>
+                        <div class="price-container">
+                            <div class="current-price">
+                                <h4>${ here is the current database price for the size selected above }</h4>
+                            </div>
+                        </div>
+                        <div class="buy-buttons-row row">
+                            <form action="/cart/add" method="POST">
+                                <div class="quantity-submit-row row">
+                                    <div class="quantity-wrapper">
+                                        <button>- quantity +</button>
+                                        <button>+ Add to Cart</button>
+                                        <button>+ Buy it Now</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="sku">
+                            SKU: { SKU HERE }
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

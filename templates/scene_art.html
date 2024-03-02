@@ -12,7 +12,7 @@
 <div class="container-fluid mt-4">
     <div class="row g-5">
       {% for art in selected_art %}
-      <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+      <div class="col-lg-4 col-md-4 col-sm-6 col-6"> <!-- Change number of artworks per row here -->
         <a href="{{ art.url }}" class="text-decoration-none">
         <div class="art-card1">
           <div class="art-image" style="background-image: url('{{ url_for('static', filename=art.image_url) }}');" data-title="{{ art.artist_name }}"></div>

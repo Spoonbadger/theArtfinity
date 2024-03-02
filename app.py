@@ -455,7 +455,7 @@ def profile():
         return render_template("artwork.html", all_art=all_art)
 
 
-
+# If artist name different have box for that other than than use .split to get first and last name
 @app.route("/register", methods=["GET", "POST"])
 def register():
     # Forget any user id

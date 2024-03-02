@@ -1,3 +1,23 @@
+NEXT:
+WHEN I CLICK BUY IT NOW on the artwork page I am taken to the checkout page and the order is there waiting. SO need a 'checkout' page
+
+TODO:
+have the cart page populate selected artworks that are stored in a users session when '+ add to cart' is pressed.
+each artwork needs an SKU.
+each artwork needs a qr code link in database.
+Add a shipping policy page.
+
+Find out what printer jason has.
+Find out the three size options.
+Update the front-end with the size options.
+Update database with the size options.
+Find out what paper to use for prints.
+Find out what paper to use for photographs.
+
+
+
+
+
 CREATE TABLE Art (
 art_id INTEGER PRIMARY KEY AUTOINCREMENT,
 title TEXT NOT NULL,

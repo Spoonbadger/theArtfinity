@@ -33,14 +33,12 @@
                                 <b>CHOOSE PRINT SIZE</b>
                             </p>
                             <div class="option-selector-btns">
-                                <!-- Loop here for available size options -->
-                                    <!-- Only show when info is there -->
-                                <input class="btn-check" checked id="btnradio1" name="btnradio1" type="radio" >
+                                <input class="btn-check" id="btnradio1" name="btnradio" type="radio" onchange="showPrice()">
                                 <label class="btn btn-outline-primary" for="btnradio1">8.5 x 11</label>
-                                <input class="btn-check" checked id="btnradio2" name="btnradio1" type="radio" >
+                                <input class="btn-check" checked id="btnradio2" name="btnradio" type="radio" onchange="showPrice()">
                                 <label class="btn btn-outline-primary" for="btnradio2">16 x 20</label>
-                                <input class="btn-check" checked id="btnradio2" name="btnradio1" type="radio" >
-                                <label class="btn btn-outline-primary" for="btnradio2">24 x 36</label>
+                                <input class="btn-check" id="btnradio3" name="btnradio" type="radio" onchange="showPrice()">
+                                <label class="btn btn-outline-primary" for="btnradio3">24 x 36</label>
                             </div><br>
                             <i>
                                 Maximum print dimensions above are listed in inches.  Actual print size is based on the original image aspect ratio.<br>
@@ -49,24 +47,94 @@
                             </i>
                         </fieldset><br>
                         <div class="price-container">
-                            <div class="current-price">
-                                <h4>${ here is the current database price for the size selected above }</h4>
+                            <div class="current-price" id="price-a5">
+                                <h4 id="a5_price" style="display: none;">${{ art_detail.a5_price }}</h4>
+                            </div>
+                            <div class="current-price" id="price-a4">
+                                <h4 id="a4_price" style="display: none;">${{ art_detail.a4_price }}</h4>
+                            </div>
+                            <div class="current-price" id="price-a3">
+                                <h4 id="a3_price" style="display: none;">${{ art_detail.a3_price }}</h4>
                             </div>
                         </div>
+                        <script>
+                            function showPrice() {
+                                var radioButtons = document.getElementsByName("btnradio");
+                                var priceElements = document.querySelectorAll(".current-price h4");
+                        
+                                for (var i = 0; i < radioButtons.length; i++) {
+                                    if (radioButtons[i].checked) {
+                                        priceElements[i].style.display = "block";
+                                    } else {
+                                        priceElements[i].style.display = "none";
+                                    }
+                                }
+                            }
+                        
+                            // Call showPrice initially to show the default selected price
+                            showPrice();
+                        </script>
+
                         <div class="buy-buttons-row row">
                             <form action="/cart/add" method="POST">
                                 <div class="quantity-submit-row row">
                                     <div class="quantity-wrapper">
-                                        <button>- quantity +</button>
+                                        <button id="decrease-btn" type="button">-</button>
+                                        <span id="quantity-display">1</span>
+                                        <button id="increase-btn" type="button">+</button>
                                         <button>+ Add to Cart</button>
                                         <button>+ Buy it Now</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <div class="sku">
-                            SKU: { SKU HERE }
-                        </div>
+                        <!-- For the Quantity buttons... -->
+                        <script>
+                            // Get references to the elements
+                            var decreaseBtn = document.getElementById("decrease-btn");
+                            var quantityDisplay = document.getElementById("quantity-display");
+                            var increaseBtn = document.getElementById("increase-btn");
+                        
+                            // Set the initial quantity and price
+                            var quantity = 1;
+                            var priceElements = document.querySelectorAll(".current-price h4");
+                            var prices = Array.from(priceElements).map(element => parseFloat(element.textContent.replace("$", "")));
+                        
+                            // Function to update the displayed price
+                            function updatePrice(totalPrice) {
+                                priceElements.forEach((element, index) => {
+                                    element.textContent = "$" + totalPrice[index].toFixed(2);
+                                });
+                            }
+                        
+                            // Function to decrease the quantity
+                            decreaseBtn.addEventListener("click", function() {
+                                if (quantity > 1) {
+                                    quantity--;
+                                    quantityDisplay.textContent = quantity;
+                                    var totalPrice = prices.map(price => price * quantity);
+                                    updatePrice(totalPrice);
+                                }
+                            });
+                        
+                            // Function to increase the quantity
+                            increaseBtn.addEventListener("click", function() {
+                                quantity++;
+                                quantityDisplay.textContent = quantity;
+                                var totalPrice = prices.map(price => price * quantity);
+                                updatePrice(totalPrice);
+                            });
+                        </script>
+
+                        <!-- For the 'Add to Cart' button -->
+                        <script>
+                            
+                        </script>
+
+                        <!-- For the 'Buy It Now' button -->
+                        <script>
+                            
+                        </script>
                     </div>
                 </div>
             </div>

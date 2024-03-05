@@ -100,12 +100,15 @@ def artwork(artist_name, art_title):
     art_details = db.execute(query, "%" + search_artist_name + "%", "%" + search_title + "%")
 
     if art_details:
-        # Assuming you want to display the first match or a specific artwork
+        # Display the first (only!) matching artwork
         art_detail = art_details[0] if art_details else None
         
         # Generate the URL for the artwork's image
         image_url = url_for('static', filename=art_detail['image_url'])
+
+        # Need to load the correct _price either a5_price a4_price or a3_price depending on the radio button selected.
         
+
         # Pass the image URL along with other artwork details to the HTML template
         return render_template("artwork.html", art_detail=art_detail, image_url=image_url)
     else:
@@ -180,6 +183,10 @@ def artist_profile(artist_name):
         return render_template("artwork.html", all_art=all_art)
 
 
+@app.route("/cart", methods=["GET", "POST"])
+def cart():
+    if request.method == "GET":
+        return render_template("cart.html")
 
 
 @app.route("/checkout", methods=["GET", "POST"])
@@ -397,6 +404,18 @@ def logout():
     # Forget any user id
     session.clear()
     return redirect(url_for("index"))
+
+
+@app.route("/order_details", methods=["GET", "POST"])
+def order_details():
+    if request.method == "GET":
+        return render_template("order_details.html")
+    
+
+@app.route("/order_placed_successfully", methods=["GET", "POST"])
+def order_placed_successfully():
+    if request.method == "GET":
+        return render_template("order_placed_successfully.html")
 
 
 @app.route("/profile", methods=["GET", "POST"])

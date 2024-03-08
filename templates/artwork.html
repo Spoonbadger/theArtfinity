@@ -24,7 +24,7 @@
                 <br>
                 <p class="text-start">{{ art_detail.description }}</p>
             </div>
-            <!-- TODO: include the size and price options for each piece of artwork and have the buttons be selectable. show the price below. SEE Loupe -->
+            <!-- Include the size and price options for each piece of artwork and have the buttons be selectable. Show the price below. -->
             <div class="size-options" style="padding-top: 100px;">
                 <div class="options-selectors">
                     <div class="option-selector">
@@ -58,13 +58,17 @@
                             </div>
                         </div>
                         <script>
+                            var selectedPrice;
+
                             function showPrice() {
                                 var radioButtons = document.getElementsByName("btnradio");
                                 var priceElements = document.querySelectorAll(".current-price h4");
+                                
                         
                                 for (var i = 0; i < radioButtons.length; i++) {
                                     if (radioButtons[i].checked) {
                                         priceElements[i].style.display = "block";
+                                        selectedPrice = parseFloat(priceElements[i].textContent.replace("$", ""));
                                     } else {
                                         priceElements[i].style.display = "none";
                                     }
@@ -76,13 +80,13 @@
                         </script>
 
                         <div class="buy-buttons-row row">
-                            <form action="/cart/add" method="POST">
+                            <form action="/cart" method="POST">
                                 <div class="quantity-submit-row row">
                                     <div class="quantity-wrapper">
                                         <button id="decrease-btn" type="button">-</button>
                                         <span id="quantity-display">1</span>
                                         <button id="increase-btn" type="button">+</button>
-                                        <button>+ Add to Cart</button>
+                                        <button onclick="addToCart()">+ Add to Cart</button>
                                         <button>+ Buy it Now</button>
                                     </div>
                                 </div>
@@ -125,15 +129,72 @@
                                 updatePrice(totalPrice);
                             });
                         </script>
+                        
+                        
 
                         <!-- For the 'Add to Cart' button -->
                         <script>
-                            
+                            function addToCart() {
+                            // Gathering artwork details
+                            var artId = "{{ art_detail.art_id }}";
+                            var artTitle = "{{ art_detail.title }}";
+                            var imageUrl = "{{ image_url }}";
+                            var artistName = "{{ art_detail.artist_name }}";
+
+                            // Get the selected size from radio buttons on the page
+                            var sizeSelected;
+                            var radioButtons = document.getElementsByName("btnradio");
+                            var selectedPrice; // Define selectedPrice here
+                            for (var i = 0; i < radioButtons.length; i++) {
+                                if (radioButtons[i].checked) {
+                                    sizeSelected = radioButtons[i].nextElementSibling.textContent.trim(); // Get the label text
+                                    selectedPrice = parseFloat(document.querySelectorAll(".current-price h4")[i].textContent.replace("$", ""));
+                                    break;
+                                }
+                            }
+
+                            // Get the quantity
+                            var quantity = parseInt(document.getElementById("quantity-display").textContent);
+
+                            // Calculate the item price
+                            var itemPrice = selectedPrice; // itemPrice is the same as selectedPrice
+
+                            // Calculate the total price
+                            var totalPrice = itemPrice * quantity;
+
+                            // Store data in session storage
+                            sessionStorage.setItem("cart", JSON.stringify({
+                                "artId": artId,
+                                "artTitle": artTitle,
+                                "artistName": artistName,
+                                "imageUrl": imageUrl,
+                                "sizeSelected": sizeSelected,
+                                "itemPrice": itemPrice,
+                                "totalPrice": totalPrice,
+                                "selectedPrice": selectedPrice,
+                                "quantity": quantity,
+                            }));
+
+                            // Redirect to the shopping cart page
+                            var url = "/cart/add?artTitle=" + encodeURIComponent(artTitle) +
+                                "&artistName=" + encodeURIComponent(artistName) +
+                                "&imageUrl=" + encodeURIComponent(imageUrl) +
+                                "&sizeSelected=" + encodeURIComponent(sizeSelected) +
+                                "&itemPrice=" + encodeURIComponent(itemPrice) +
+                                "&totalPrice=" + encodeURIComponent(totalPrice) +
+                                "&artId=" + encodeURIComponent(artId) +
+                                "$quantity=" + encodeURIComponent(quantity) +
+                                "&selectedPrice=" + encodeURIComponent(selectedPrice);
+                            window.location.href = url;
+                        }
+
                         </script>
+
+
 
                         <!-- For the 'Buy It Now' button -->
                         <script>
-                            
+
                         </script>
                     </div>
                 </div>

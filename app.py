@@ -13,6 +13,9 @@ app = Flask(__name__)
 
 app.jinja_env.filters['slugify'] = slugify
 
+# Set the secret key
+app.secret_key = 'top_secret_craig_morley_key'
+
 # Configure session to use filesystem
 # Sets session to the browsing length only
 app.config["SESSION_PERMANENT"] = False
@@ -186,7 +189,35 @@ def artist_profile(artist_name):
 @app.route("/cart", methods=["GET", "POST"])
 def cart():
     if request.method == "GET":
-        return render_template("cart.html")
+        title = session.get("title")
+        artist = session.get("artist")
+        image_url = session.get('image_url')
+        materials = session.get("materials")
+        size_selected = session.get("size_selected")
+        price = session.get("price")
+        total_price = session.get("total_price")
+
+        return render_template("cart.html", title=title, artist=artist, image_url=image_url, materials=materials, price=price, size_selected=size_selected, total_price=total_price)
+    
+    elif request.method == "POST":
+        title = request.args.get("title")
+        artist = request.args.get("artist")
+        image_url = request.args.get("image_url")
+        materials = request.args.get("materials")
+        size_selected = request.args.get("size_selected")
+        price = request.args.get("price")
+        total_price = request.args.get("total_price")
+
+        # Store the data in the session
+        session['title'] = title
+        session['artist'] = artist
+        session['image_url'] = image_url
+        session['materials'] = materials
+        session['size_selected'] = size_selected
+        session['price'] = price
+        session['total_price'] = total_price
+
+        return redirect(url_for('cart'))
 
 
 @app.route("/checkout", methods=["GET", "POST"])

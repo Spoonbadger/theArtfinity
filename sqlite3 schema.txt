@@ -102,8 +102,11 @@ total_tax REAL NOT NULL,
 total_price REAL NOT NULL,
 FOREIGN KEY (user_id) REFERENCES Users(user_id),
 FOREIGN KEY (order_id) REFERENCES Orders(order_id)
+order_id INTEGER - NEED TO ADD THIS                   -- NEED TO ADD THIS a random 6 digit number ADD to 'Orders' TABLE too.
 );
 
+
+later...
 
 CREATE TABLE UserLikes (
 like_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -147,13 +150,13 @@ total_tax REAL NOT NULL,
 total_price REAL NOT NULL,
 FOREIGN KEY (user_id) REFERENCES Users(user_id),
 FOREIGN KEY (art_id) REFERENCES Art(art_id)
+order_id INTEGER - NEED TO ADD THIS                  -- NEED TO ADD THIS a random 6 digit number link with 'UserPurchaseHistory' TABLE too.
 );
 
 
 
 
 
-Somehow link all the art with the artists with the scenes
 
 This is imdb.com 
 

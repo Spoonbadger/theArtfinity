@@ -10,7 +10,8 @@ import uuid
 from flask import redirect, render_template, session
 from functools import wraps
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'webp'])
+# Can't get .HEIC files to upload.
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'webp', 'heic'])
 
 def allowed_file(filename):
     return '.' in filename and \

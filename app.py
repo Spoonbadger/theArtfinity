@@ -628,42 +628,41 @@ def upload():
                 # Handle the case where artist_name is not found
                 return "Artist not found", 404
 
-            # Check if the post request has the file part
-            if 'image_url' not in request.files:
-                return redirect(request.url)
-            image_file = request.files['image_url']
+            # Define the upload folder path
+            user_upload_folder = os.path.join(BASE_UPLOAD_FOLDER, artist_name)
 
-             # Validate the file before saving
-            if image_file and allowed_file(image_file.filename):
-
-                # Construct the path for the user's upload folder
-                user_upload_folder = os.path.join(BASE_UPLOAD_FOLDER, artist_name)
-
-            # Check if this folder exists, create it if not
+            # Check if the upload folder exists, create it if necessary
             if not os.path.exists(user_upload_folder):
                 os.makedirs(user_upload_folder)
 
             # Check if the post request has the file part
             if 'image_url' not in request.files:
                 return redirect(request.url)
+
             image_file = request.files['image_url']
 
             # If the user does not select a file, the browser submits an
             # empty file without a filename.
-            if image_file.filename == '':
+            if not image_file or image_file.filename == '':
+                return redirect(request.url)
+            
+            # Check if the file extension is allowed
+            if not allowed_file(image_file.filename):
+                flash('File type not allowed. Please upload a PNG, JPG, JPEG, GIF, WEBP, or HEIC file.')
                 return redirect(request.url)
 
-            if image_file:
+            # Validate the file before saving
+            if image_file and allowed_file(image_file.filename):
                 filename = secure_filename(image_file.filename)
                 # Define a relative path within the static directory
                 relative_path = os.path.join('uploads', artist_name, filename)
-                
+
                 # Construct the absolute save path using Flask's app.static_folder
                 save_path = os.path.join(app.static_folder, relative_path)
-                
+
                 # Ensure the directory exists
                 os.makedirs(os.path.dirname(save_path), exist_ok=True)
-                
+
                 # Save the image file
                 image_file.save(save_path)
 
@@ -685,13 +684,15 @@ def upload():
                     a4_price = float(a4_price)
                     a3_price = float(a3_price)
                 except ValueError:
-                # Handle the error if the conversion fails
+                    # Handle the error if the conversion fails
                     return "Invalid price format. Please enter a valid number."
 
                 # Upload the art into the database
                 db.execute("INSERT INTO Art (image_url, title, description, genres, original_size, print_size_a5, print_size_a4, print_size_a3, a5_price, a4_price, a3_price) VALUES (:image_url, :title, :description, :genres, :original_size, :print_size_a5, :print_size_a4, :print_size_a3, :a5_price, :a4_price, :a3_price)",
-                        image_url=relative_path, title=title, description=description, genres=genres, original_size=original_size, print_size_a5=print_size_a5, print_size_a4=print_size_a4, print_size_a3=print_size_a3, a5_price=a5_price, a4_price=a4_price, a3_price=a3_price)
-                
+                           image_url=relative_path, title=title, description=description, genres=genres,
+                           original_size=original_size, print_size_a5=print_size_a5, print_size_a4=print_size_a4,
+                           print_size_a3=print_size_a3, a5_price=a5_price, a4_price=a4_price, a3_price=a3_price)
+
                 # Now, retrieve the art_id based on the 'image_url'
                 art_id_row = db.execute("SELECT art_id FROM Art WHERE image_url = :image_url",
                                         image_url=relative_path)
@@ -700,9 +701,11 @@ def upload():
 
                     # Now, insert the linkage into UserArt table
                     db.execute("INSERT INTO UserArt (user_id, art_id) VALUES (:user_id, :art_id)",
-                            user_id=user_id, art_id=art_id)
+                               user_id=user_id, art_id=art_id)
 
                 return redirect(url_for("profile"))
         else:
             return redirect("/login")
-        
+
+    # Handle the case where the request method is not GET or POST
+    return "Method not allowed", 405

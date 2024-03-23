@@ -1,1068 +1,1010 @@
 .add-picture-overlay {
-    position: relative; /* Position the overlay relative to the profile picture container */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  position: relative; /* Position the overlay relative to the profile picture container */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .artbox-div {
-    /* background-color: if desired */
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    min-height: 200px;
-    padding-left: 50px;
-    padding-right: 50px;
+  /* background-color: if desired */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 200px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
-
 
 .artist-link,
 .social-media-link {
-    color: #D88; /* Adjust color as needed */
-    text-decoration: none;
+  color: #d88; /* Adjust color as needed */
+  text-decoration: none;
 }
 
-
 .art-index-table-wrapper {
-    box-sizing: border-box;
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 50px;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 50px;
 }
 
 .art-index-table {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    list-style: none;
-    width: 95%;
-    padding-bottom: 100px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  width: 95%;
+  padding-bottom: 100px;
 }
 
 .art-index-name {
-    box-sizing: border-box;
-    display: flex;
-    flex: 0 0 20%;
-    justify-content: left;
-    padding-left: 55px;
-    padding-top: 25px;
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 0 20%;
+  justify-content: left;
+  padding-left: 55px;
+  padding-top: 25px;
 }
-
 
 .art-index {
-    display: flex;
-    align-items: center;
-    margin-top: 50px;
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
 }
-
 
 .artist-index {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
-
 .artist-index-table-wrapper {
-    box-sizing: border-box;
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 50px;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 50px;
 }
 
 .artist-index-table {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    list-style: none;
-    width: 95%;
-    padding-bottom: 100px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  width: 95%;
+  padding-bottom: 100px;
 }
 
 .artist-index-name {
-    box-sizing: border-box;
-    display: flex;
-    flex: 0 0 20%;
-    justify-content: left;
-    padding-left: 55px;
-    padding-top: 25px;
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 0 20%;
+  justify-content: left;
+  padding-left: 55px;
+  padding-top: 25px;
 }
 
-
 .art-row {
-    display: flex;
-    width: 100%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    flex-wrap: wrap;
+  display: flex;
+  width: 100%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  flex-wrap: wrap;
 }
 
 .art-col {
-    min-height: 50px;
-    min-width: 50px;
-    background-color: pink;
-    display: flex;
-    width: 18%;
-    padding-bottom: 15%; /* Set padding-bottom to create a square based on width */
-    line-height: 100%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    margin-left: 3%;
-    margin-right: 3%;
+  min-height: 50px;
+  min-width: 50px;
+  background-color: pink;
+  display: flex;
+  width: 18%;
+  padding-bottom: 15%; /* Set padding-bottom to create a square based on width */
+  line-height: 100%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-left: 3%;
+  margin-right: 3%;
 }
 
-
 .artist-row {
-    display: flex;
-    width: 100%;
-    margin-top: 2%;
-    margin-bottom: 2%;
+  display: flex;
+  width: 100%;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 .artist-col {
-    min-height: 50px;
-    min-width: 50px;
-    background-color: pink;
-    display: flex;
-    width: 15%;
-    padding-bottom: 15%; /* Set padding-bottom to create a square based on width */
-    line-height: 100%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    margin-left: 1%;
-    margin-right: 1%;
+  min-height: 50px;
+  min-width: 50px;
+  background-color: pink;
+  display: flex;
+  width: 15%;
+  padding-bottom: 15%; /* Set padding-bottom to create a square based on width */
+  line-height: 100%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-left: 1%;
+  margin-right: 1%;
 }
-
 
 .bio-and-links.column-two-thirds {
-    width: 66.66%;
-    text-align: left;
-    margin-left: 5%;
+  width: 66.66%;
+  text-align: left;
+  margin-left: 5%;
 }
-
 
 .column-third {
-    width: 33%;
+  width: 33%;
 }
 
-
 .column-two-thirds {
-    width: 66%;
+  width: 66%;
 }
 
 .container-fluid {
-    box-sizing: border-box;
-    margin-bottom: 1%;
-    margin-top: 1%;
+  box-sizing: border-box;
+  margin-bottom: 1%;
+  margin-top: 1%;
 }
 
 .center-text {
-    text-align: center;
+  text-align: center;
 }
-
 
 .col {
-    min-height: 80px;
-    min-width: 80px;
-    background-color: pink;
-    display: flex;
-    width: 15%;
-    padding-bottom: 15%; /* Set padding-bottom to create a square based on width */
-    line-height: 100%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    margin-left: 3%;
-    margin-right: 3%;
-    position: relative;
+  min-height: 80px;
+  min-width: 80px;
+  background-color: pink;
+  display: flex;
+  width: 15%;
+  padding-bottom: 15%; /* Set padding-bottom to create a square based on width */
+  line-height: 100%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-left: 3%;
+  margin-right: 3%;
+  position: relative;
 }
 
-
-
-
-
-
-
 .container-parent {
-    box-sizing: border-box;
-    width: 100%;
-    }
-    
+  box-sizing: border-box;
+  width: 100%;
+}
+
 .container-column {
-    box-sizing: border-box;
-    display: flex;
-    }
+  box-sizing: border-box;
+  display: flex;
+}
 
 .container-half {
-    box-sizing: border-box;
-    display: flex;
-    width: 45%;
+  box-sizing: border-box;
+  display: flex;
+  width: 45%;
 }
 
 .container-third {
-    box-sizing: border-box;
-    display: flex;
-    width: 33%;
+  box-sizing: border-box;
+  display: flex;
+  width: 33%;
 }
 
 .container-two-thirds {
-    box-sizing: border-box;
-    display: flex;
-    width: 66%;
+  box-sizing: border-box;
+  display: flex;
+  width: 66%;
 }
 
 .container-column-third {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    width: 33%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 33%;
 }
 
 .container-column-two-thirds {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    width: 66%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 66%;
 }
-
 
 .flex-parent {
-    box-sizing: border-box;
-    display: flex;
-    width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
 }
-  
+
 .flex-child {
-    flex: 1;
-    margin: 10px;
+  flex: 1;
+  margin: 10px;
 }
-  
 
 .justify-content-left {
-    justify-content: flex-start;
+  justify-content: flex-start;
 }
 
 .justify-content-center {
-    justify-content: center;
+  justify-content: center;
 }
 
 .justify-content-right {
-    justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 .align-items-left {
-    align-items: flex-start;
+  align-items: flex-start;
 }
 
 .align-items-center {
-    align-items: center;
+  align-items: center;
 }
 
 .align-items-right {
-    align-items: flex-end;
+  align-items: flex-end;
 }
 
 .font-xxl {
-font-size: xx-large;
+  font-size: xx-large;
 }
 
 .font-xl {
-    font-size: x-large;
-    }
+  font-size: x-large;
+}
 
 .font-l {
-    font-size: large;
+  font-size: large;
 }
 
 .font-m {
-    font-size: medium;
+  font-size: medium;
 }
 
 .font-s {
-    font-size: small;
+  font-size: small;
 }
 
 .font-xs {
-    font-size: x-small;
+  font-size: x-small;
 }
 
 .font-xxs {
-    font-size: xx-small;
+  font-size: xx-small;
 }
 
 .margin-small {
-    margin: 10px;
+  margin: 10px;
 }
 
 .margin-medium {
-    margin: 25px;
+  margin: 25px;
 }
 
 .margin-large {
-    margin: 50px;
+  margin: 50px;
 }
-
-
-
-
-
 
 .edit-button {
-    box-sizing: border-box;
-    text-align: right;
-    margin-right: 3%;
+  box-sizing: border-box;
+  text-align: right;
+  margin-right: 3%;
 }
 
-
-
 .index-filter {
-    flex-grow: 1;
-    font-weight: 600;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
+  flex-grow: 1;
+  font-weight: 600;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .index-filter li {
-    display: inline-block;
-    margin-right: 20px; /* Adjust spacing between items */
+  display: inline-block;
+  margin-right: 20px; /* Adjust spacing between items */
 }
 
 .index-filter li::after {
-    content: '|';
-    font-weight: bold;
-    margin-left: 20px; /* Adjust spacing between '|' and next item */
-    color: #666; /* Adjust color as needed */
+  content: "|";
+  font-weight: bold;
+  margin-left: 20px; /* Adjust spacing between '|' and next item */
+  color: #666; /* Adjust color as needed */
 }
 
 /* Remove separator after the last item */
 .index-filter li:last-child::after {
-    content: none;
-    margin-left: 0; /* Remove margin for the last separator */
+  content: none;
+  margin-left: 0; /* Remove margin for the last separator */
 }
-
 
 .link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
-
 
 .main-heading {
-    box-sizing: border-box;
-    line-height: 150%;
-    margin-top: 2%;
+  box-sizing: border-box;
+  line-height: 150%;
+  margin-top: 2%;
 }
 
-
 .navbar {
-    margin-bottom: 0%;
+  margin-bottom: 0%;
 }
 
 /* Size for the logo */
 nav .navbar-brand {
-    font-size: xx-large;
-    padding-left: 3%;
+  font-size: xx-large;
+  padding-left: 3%;
 }
-
 
 /* Colours for the brand */
 nav .navbar-brand .pink {
-    color: #D88;
+  color: #d88;
 }
 
 .background-color {
-    color: #867937;
+  color: #867937;
 }
 
 .text-color {
-    color: #691414;
+  color: #691414;
 }
 
 .parent-div {
-    /* background-color: */
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 3%;
-    min-height: 200px;
-    padding-left: 50px;
-    padding-right: 50px;
+  /* background-color: */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 3%;
+  min-height: 200px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
-
 .profile-art {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .profile-container-column {
-    margin-right: 15%;
-    display: flex;
-    flex-direction: column;
-    min-height: 50px;
+  margin-right: 15%;
+  display: flex;
+  flex-direction: column;
+  min-height: 50px;
 }
 
 .profile-container {
-    margin-right: 15%;
-    display: flex;
+  margin-right: 15%;
+  display: flex;
 
-    min-height: 50px;
+  min-height: 50px;
 }
-
 
 .profile-info {
-    background-color: lightcoral;
-    display: flex;
-    flex-basis: 55%;
-    flex-direction: row;
-    text-align: center;
-    line-height: 100px;
+  background-color: lightcoral;
+  display: flex;
+  flex-basis: 55%;
+  flex-direction: row;
+  text-align: center;
+  line-height: 100px;
 }
-
 
 .row {
-    width: 100%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    display: flex;
+  width: 100%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  display: flex;
 }
-
 
 .table-heading {
-    box-sizing: border-box;
-    padding: 2% 10%;
+  box-sizing: border-box;
+  padding: 2% 10%;
 }
-
-
-
 
 .input-group {
-    position: relative;
-  }
-  
-  .input-group .input-group-text {
-    position: absolute;
-    top: 50%;
-    left: 10px; /* Adjust as needed */
-    transform: translateY(-50%);
-    background-color: transparent;
-    border: none;
-    pointer-events: none;
-  }
-  
-  .input-group .form-control {
-    padding-left: 30px; /* Adjust as needed */
-  }
-
-
-
-  /* FOR IMAGE PREVIEW */
-  .img-preview {
-    display: block; /* Replace 'none' with 'block' to make it visible after image is loaded */
-    max-width: 100%; /* Adjust as per your container's width */
-    max-height: 600px; /* Adjust as per your container's height */
-    object-fit: contain; /* Maintain the aspect ratio */
-    margin: 0 auto; /* Center the image */
+  position: relative;
 }
 
-  /* FOR PROFILE PREVIEW */
-  .profile-preview {
-    display: block; /* Replace 'none' with 'block' to make it visible after image is loaded */
-    max-width: 100%; /* Adjust as per your container's width */
-    max-height: 500px; /* Adjust as per your container's height */
-    object-fit: contain; /* Maintain the aspect ratio */
-    margin: 0 auto; /* Center the image */
+.input-group .input-group-text {
+  position: absolute;
+  top: 50%;
+  left: 10px; /* Adjust as needed */
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  pointer-events: none;
 }
 
+.input-group .form-control {
+  padding-left: 30px; /* Adjust as needed */
+}
+
+/* FOR IMAGE PREVIEW */
+.img-preview {
+  display: block; /* Replace 'none' with 'block' to make it visible after image is loaded */
+  max-width: 100%; /* Adjust as per your container's width */
+  max-height: 600px; /* Adjust as per your container's height */
+  object-fit: contain; /* Maintain the aspect ratio */
+  margin: 0 auto; /* Center the image */
+}
+
+/* FOR PROFILE PREVIEW */
+.profile-preview {
+  display: block; /* Replace 'none' with 'block' to make it visible after image is loaded */
+  max-width: 100%; /* Adjust as per your container's width */
+  max-height: 500px; /* Adjust as per your container's height */
+  object-fit: contain; /* Maintain the aspect ratio */
+  margin: 0 auto; /* Center the image */
+}
 
 /* FOR PROFILE IMAGE */
 .profile-pic {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* This ensures the aspect ratio is maintained */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This ensures the aspect ratio is maintained */
 }
 
 .profile-image {
-    /* Adjust the width and height as needed HOW DO I CHANGE TO WHATEVER THE ARTIST WANTS? */
-    width: 400px;  /* Example width */
-    height: 400px; /* Example height */
-    overflow: hidden;
-    position: relative;
+  /* Adjust the width and height as needed HOW DO I CHANGE TO WHATEVER THE ARTIST WANTS? */
+  width: 400px; /* Example width */
+  height: 400px; /* Example height */
+  overflow: hidden;
+  position: relative;
 }
 
-
 .artwork-image {
-    margin: 0 auto; /* Center the div */
-    width: 620px; /* Example fixed width */
-    height: 620px; /* Example fixed height */
-    overflow: hidden;
-    position: relative;
-    display: flex; /* Use flex to center the child img */
-    justify-content: center; /* Center horizontally for flex items */
-    align-items: top; /* Center vertically for flex items */
+  margin: 0 auto; /* Center the div */
+  width: 620px; /* Example fixed width */
+  height: 620px; /* Example fixed height */
+  overflow: hidden;
+  position: relative;
+  display: flex; /* Use flex to center the child img */
+  justify-content: center; /* Center horizontally for flex items */
+  align-items: top; /* Center vertically for flex items */
 }
 
 .artwork-image img {
-    max-width: 100%; /* Ensure the image is not wider than its container */
-    max-height: 100%; /* Ensure the image is not taller than its container */
-    object-fit: cover; /* Cover the area of the container without losing aspect ratio */
+  max-width: 100%; /* Ensure the image is not wider than its container */
+  max-height: 100%; /* Ensure the image is not taller than its container */
+  object-fit: cover; /* Cover the area of the container without losing aspect ratio */
 }
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
-    .artwork-image {
-        width: 100%; /* Take full width of the parent container */
-        height: auto; /* Height auto for maintaining aspect ratio */
-    }
+  .artwork-image {
+    width: 100%; /* Take full width of the parent container */
+    height: auto; /* Height auto for maintaining aspect ratio */
+  }
 }
-
-
-
 
 /* ART CARDS */
 .art-card1 {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: auto;
-    overflow: hidden;
-    position: relative;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+}
 
-  
-  .art-image {
-    width: 100%;
-    padding-top: 100%; /* Keeps the aspect ratio 1:1 */
-    background-size: cover;
-    background-position: center;
-    position: relative;
-  }
-  
-  /* Hover Content Styling */
-  .art-image::after {
-    content: attr(data-title); /* Use a data attribute for the artist name */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    opacity: 0; /* Hide by default */
-    transition: opacity 0.5s; /* Smooth transition */
-    overflow: hidden; /* Ensures text doesn't overflow */
-  }
-  
-  .art-card:hover .art-image::after {
-    opacity: 1; /* Show on hover */
-  }
+.art-image {
+  width: 100%;
+  padding-top: 100%; /* Keeps the aspect ratio 1:1 */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
 
+/* Hover Content Styling */
+.art-image::after {
+  content: attr(data-title); /* Use a data attribute for the artist name */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  opacity: 0; /* Hide by default */
+  transition: opacity 0.5s; /* Smooth transition */
+  overflow: hidden; /* Ensures text doesn't overflow */
+}
+
+.art-card:hover .art-image::after {
+  opacity: 1; /* Show on hover */
+}
 
 /* Change link text from blue to black */
 .black-font {
-    color: black; /* Change the text color to black */
-    text-decoration: none; /* Optional: Removes the underline from links */
+  color: black; /* Change the text color to black */
+  text-decoration: none; /* Optional: Removes the underline from links */
 }
-
 
 /* CAROUSEL */
 .art-card {
-    position: relative;
-    width: 100%; /* Adjust width as necessary, or use Bootstrap grid classes */
-    padding-top: 100%; /* For square aspect ratio */
-    background-size: cover;
-    background-position: center center;
-    margin-bottom: 0px; /* Optional margin for spacing */
-  }
-  
-  .art-image-carousel {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-  
-  .art-card .overlay {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
-    color: #fff;
-    text-align: center;
-    opacity: 0; /* Hide the overlay by default */
-    transition: opacity 0.5s ease;
-    padding: 10px 0;
-  }
-  
-  .art-card:hover .overlay {
-    opacity: 1; /* Show the overlay on hover */
-  }
+  position: relative;
+  width: 100%; /* Adjust width as necessary, or use Bootstrap grid classes */
+  padding-top: 100%; /* For square aspect ratio */
+  background-size: cover;
+  background-position: center center;
+  margin-bottom: 0px; /* Optional margin for spacing */
+}
 
-  
+.art-image-carousel {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 
+.art-card .overlay {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  color: #fff;
+  text-align: center;
+  opacity: 0; /* Hide the overlay by default */
+  transition: opacity 0.5s ease;
+  padding: 10px 0;
+}
 
-
-
+.art-card:hover .overlay {
+  opacity: 1; /* Show the overlay on hover */
+}
 
 /* Carousel indicators */
-.carousel-control-prev, .carousel-control-next {
-    width: 120px; /* Adjust the width as needed */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 120px; /* Adjust the width as needed */
 }
 
-.carousel-control-prev-icon, .carousel-control-next-icon {
-    background-image: none; /* Remove the default background images */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-image: none; /* Remove the default background images */
 }
 
-.carousel-control-prev-icon:after, .carousel-control-next-icon:after {
-    content: ''; /* Add your custom arrow icon here, e.g., using a background image */
-    color: lightgray;
-    font-family: 'BootstrapIcons'; /* Example for using a font icon */
-    font-size: 40px; /* Adjust the size as needed */
+.carousel-control-prev-icon:after,
+.carousel-control-next-icon:after {
+  content: ""; /* Add your custom arrow icon here, e.g., using a background image */
+  color: lightgray;
+  font-family: "BootstrapIcons"; /* Example for using a font icon */
+  font-size: 40px; /* Adjust the size as needed */
 }
 
 .carousel-control-prev-icon:after {
-    content: '\2039'; /* Example content for left arrow (use your own icon) */
+  content: "\2039"; /* Example content for left arrow (use your own icon) */
 }
 
 .carousel-control-next-icon:after {
-    content: '\203a'; /* Example content for right arrow (use your own icon) */
+  content: "\203a"; /* Example content for right arrow (use your own icon) */
 }
 
-.carousel-control-prev, .carousel-control-next {
-    top: 0;
-    bottom: 0;
-    align-items: center; /* Vertically center the arrows */
-    justify-content: center; /* This applies if you're using flexbox */
-    opacity: 1; /* Make sure arrows are always visible */
+.carousel-control-prev,
+.carousel-control-next {
+  top: 0;
+  bottom: 0;
+  align-items: center; /* Vertically center the arrows */
+  justify-content: center; /* This applies if you're using flexbox */
+  opacity: 1; /* Make sure arrows are always visible */
 }
 
 .carousel-control-prev {
-    left: 0;
+  left: 0;
 }
 
 .carousel-control-next {
-    right: 0;
+  right: 0;
 }
-
 
 .hidden {
-    opacity: 0;
-    transition: all 1s;
+  opacity: 0;
+  transition: all 1s;
 }
-  
+
 .show {
-    opacity: 1;
+  opacity: 1;
 }
-  
-
-
 
 /* Cart.html CSS */
-body{
-    margin-top:20px;
-    background-color: #f1f3f7;
+body {
+  /* margin-top: 20px; */
+  background-color: #f1f3f7;
 }
 
 .avatar-lg {
-    height: 5rem;
-    width: 5rem;
+  height: 5rem;
+  width: 5rem;
 }
 
 .font-size-18 {
-    font-size: 18px!important;
+  font-size: 18px !important;
 }
 
 .text-truncate {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 a {
-    text-decoration: none!important;
+  text-decoration: none !important;
 }
 
 .w-xl {
-    min-width: 160px;
+  min-width: 160px;
 }
 
 .card {
-    margin-bottom: 24px;
-    -webkit-box-shadow: 0 2px 3px #e4e8f0;
-    box-shadow: 0 2px 3px #e4e8f0;
+  margin-bottom: 24px;
+  -webkit-box-shadow: 0 2px 3px #e4e8f0;
+  box-shadow: 0 2px 3px #e4e8f0;
 }
 
 .card {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid #eff0f2;
-    border-radius: 1rem;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #eff0f2;
+  border-radius: 1rem;
 }
-
-
 
 /* Order_details.html (possible conflict with Cart.html CSS */
 
-body{
-    background:#eee;
+body {
+  background: #eee;
 }
 .card_od {
-    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+  box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
 }
 .card_od {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 0 solid rgba(0,0,0,.125);
-    border-radius: 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 0 solid rgba(0, 0, 0, 0.125);
+  border-radius: 1rem;
 }
 .text-reset_od {
-    --bs-text-opacity: 1;
-    color: inherit!important;
+  --bs-text-opacity: 1;
+  color: inherit !important;
 }
 a_od {
-    color: #5465ff;
-    text-decoration: none;
+  color: #5465ff;
+  text-decoration: none;
 }
 
 /* order_placed_sucessfully.html */
 
 body {
-    margin-top: 20px;
+  /* margin-top: 20px; */
 }
 .text-center {
-    text-align: center !important;
+  text-align: center !important;
 }
 .mb-5 {
-    margin-bottom: 3rem !important;
+  margin-bottom: 3rem !important;
 }
 .mx-auto {
-    margin-right: auto !important;
-    margin-left: auto !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
 }
 .text-reset {
-    --bs-text-opacity: 1;
-    color: inherit !important;
+  --bs-text-opacity: 1;
+  color: inherit !important;
 }
 a_ops {
-    color: #5465ff;
-    text-decoration: none;
+  color: #5465ff;
+  text-decoration: none;
 }
 body {
-    background: #eee;
+  background: #eee;
 }
 .card_ops {
-    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+  box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
 }
 .card_ops {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 0 solid rgba(0, 0, 0, 0.125);
-    border-radius: 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 0 solid rgba(0, 0, 0, 0.125);
+  border-radius: 1rem;
 }
 .card-body_ops {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    padding: 1.5rem 1.5rem;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.5rem 1.5rem;
 }
-
 
 /*  Checkout (payment) */
 
-body{margin-top:20px;
-    background-color: #f1f3f7;
-    }
-    
-    .card_check {
-        margin-bottom: 24px;
-        -webkit-box-shadow: 0 2px 3px #e4e8f0;
-        box-shadow: 0 2px 3px #e4e8f0;
-    }
-    .card_check {
-        position: relative;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        min-width: 0;
-        word-wrap: break-word;
-        background-color: #fff;
-        background-clip: border-box;
-        border: 1px solid #eff0f2;
-        border-radius: 1rem;
-    }
-    .activity-checkout {
-        list-style: none
-    }
-    
-    .activity-checkout .checkout-icon {
-        position: absolute;
-        top: -4px;
-        left: -24px
-    }
-    
-    .activity-checkout .checkout-item {
-        position: relative;
-        padding-bottom: 24px;
-        padding-left: 35px;
-        border-left: 2px solid #f5f6f8
-    }
-    
-    .activity-checkout .checkout-item:first-child {
-        border-color: #3b76e1
-    }
-    
-    .activity-checkout .checkout-item:first-child:after {
-        background-color: #3b76e1
-    }
-    
-    .activity-checkout .checkout-item:last-child {
-        border-color: transparent
-    }
-    
-    .activity-checkout .checkout-item.crypto-activity {
-        margin-left: 50px
-    }
-    
-    .activity-checkout .checkout-item .crypto-date {
-        position: absolute;
-        top: 3px;
-        left: -65px
-    }
-    
-    
-    
-    .avatar-xs {
-        height: 1rem;
-        width: 1rem
-    }
-    
-    .avatar-sm {
-        height: 2rem;
-        width: 2rem
-    }
-    
-    .avatar {
-        height: 3rem;
-        width: 3rem
-    }
-    
-    .avatar-md {
-        height: 4rem;
-        width: 4rem
-    }
-    
-    .avatar-lg {
-        height: 5rem;
-        width: 5rem
-    }
-    
-    .avatar-xl {
-        height: 6rem;
-        width: 6rem
-    }
-    
-    .avatar-title {
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        background-color: #3b76e1;
-        color: #fff;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        font-weight: 500;
-        height: 100%;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        width: 100%
-    }
-    
-    .avatar-group {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        padding-left: 8px
-    }
-    
-    .avatar-group .avatar-group-item {
-        margin-left: -8px;
-        border: 2px solid #fff;
-        border-radius: 50%;
-        -webkit-transition: all .2s;
-        transition: all .2s
-    }
-    
-    .avatar-group .avatar-group-item:hover {
-        position: relative;
-        -webkit-transform: translateY(-2px);
-        transform: translateY(-2px)
-    }
-    
-    .card-radio {
-        background-color: #fff;
-        border: 2px solid #eff0f2;
-        border-radius: .75rem;
-        padding: .5rem;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        display: block
-    }
-    
-    .card-radio:hover {
-        cursor: pointer
-    }
-    
-    .card-radio-label {
-        display: block
-    }
-    
-    .edit-btn {
-        width: 35px;
-        height: 35px;
-        line-height: 40px;
-        text-align: center;
-        position: absolute;
-        right: 25px;
-        margin-top: -50px
-    }
-    
-    .card-radio-input {
-        display: none
-    }
-    
-    .card-radio-input:checked+.card-radio {
-        border-color: #3b76e1!important
-    }
-    
-    
-    .font-size-16 {
-        font-size: 16px!important;
-    }
-    .text-truncate {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    
-    a {
-        text-decoration: none!important;
-    }
-    
-    
-    .form-control {
-        display: block;
-        width: 100%;
-        padding: 0.47rem 0.75rem;
-        font-size: .875rem;
-        font-weight: 400;
-        line-height: 1.5;
-        color: #545965;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #e2e5e8;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        border-radius: 0.75rem;
-        -webkit-transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
-        transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
-        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
-    }
-    
-    .edit-btn {
-        width: 35px;
-        height: 35px;
-        line-height: 40px;
-        text-align: center;
-        position: absolute;
-        right: 25px;
-        margin-top: -50px;
-    }
-    
-    .ribbon {
-        position: absolute;
-        right: -26px;
-        top: 20px;
-        -webkit-transform: rotate(45deg);
-        transform: rotate(45deg);
-        color: #fff;
-        font-size: 13px;
-        font-weight: 500;
-        padding: 1px 22px;
-        font-size: 13px;
-        font-weight: 500
-    }
+body {
+  /* margin-top: 20px; */
+  background-color: #f1f3f7;
+}
 
+.card_check {
+  margin-bottom: 24px;
+  -webkit-box-shadow: 0 2px 3px #e4e8f0;
+  box-shadow: 0 2px 3px #e4e8f0;
+}
+.card_check {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #eff0f2;
+  border-radius: 1rem;
+}
+.activity-checkout {
+  list-style: none;
+}
 
-    body{
-        background:#eee;
-    }
-    
-    .card_check2 {
-        box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
-    }
-    
-    .card_check2 {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-        word-wrap: break-word;
-        background-color: #fff;
-        background-clip: border-box;
-        border: 0 solid rgba(0,0,0,.125);
-        border-radius: 1rem;
-    }
-    
-    .card-body_check2 {
-        -webkit-box-flex: 1;
-        -ms-flex: 1 1 auto;
-        flex: 1 1 auto;
-        padding: 1.5rem 1.5rem;
-    }
+.activity-checkout .checkout-icon {
+  position: absolute;
+  top: -4px;
+  left: -24px;
+}
 
+.activity-checkout .checkout-item {
+  position: relative;
+  padding-bottom: 24px;
+  padding-left: 35px;
+  border-left: 2px solid #f5f6f8;
+}
+
+.activity-checkout .checkout-item:first-child {
+  border-color: #3b76e1;
+}
+
+.activity-checkout .checkout-item:first-child:after {
+  background-color: #3b76e1;
+}
+
+.activity-checkout .checkout-item:last-child {
+  border-color: transparent;
+}
+
+.activity-checkout .checkout-item.crypto-activity {
+  margin-left: 50px;
+}
+
+.activity-checkout .checkout-item .crypto-date {
+  position: absolute;
+  top: 3px;
+  left: -65px;
+}
+
+.avatar-xs {
+  height: 1rem;
+  width: 1rem;
+}
+
+.avatar-sm {
+  height: 2rem;
+  width: 2rem;
+}
+
+.avatar {
+  height: 3rem;
+  width: 3rem;
+}
+
+.avatar-md {
+  height: 4rem;
+  width: 4rem;
+}
+
+.avatar-lg {
+  height: 5rem;
+  width: 5rem;
+}
+
+.avatar-xl {
+  height: 6rem;
+  width: 6rem;
+}
+
+.avatar-title {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #3b76e1;
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 500;
+  height: 100%;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.avatar-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding-left: 8px;
+}
+
+.avatar-group .avatar-group-item {
+  margin-left: -8px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.avatar-group .avatar-group-item:hover {
+  position: relative;
+  -webkit-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+.card-radio {
+  background-color: #fff;
+  border: 2px solid #eff0f2;
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+
+.card-radio:hover {
+  cursor: pointer;
+}
+
+.card-radio-label {
+  display: block;
+}
+
+.edit-btn {
+  width: 35px;
+  height: 35px;
+  line-height: 40px;
+  text-align: center;
+  position: absolute;
+  right: 25px;
+  margin-top: -50px;
+}
+
+.card-radio-input {
+  display: none;
+}
+
+.card-radio-input:checked + .card-radio {
+  border-color: #3b76e1 !important;
+}
+
+.font-size-16 {
+  font-size: 16px !important;
+}
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.47rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #545965;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #e2e5e8;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.75rem;
+  -webkit-transition: border-color 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
+}
+
+.edit-btn {
+  width: 35px;
+  height: 35px;
+  line-height: 40px;
+  text-align: center;
+  position: absolute;
+  right: 25px;
+  margin-top: -50px;
+}
+
+.ribbon {
+  position: absolute;
+  right: -26px;
+  top: 20px;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 1px 22px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+body {
+  background: #eee;
+}
+
+.card_check2 {
+  box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+}
+
+.card_check2 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 0 solid rgba(0, 0, 0, 0.125);
+  border-radius: 1rem;
+}
+
+.card-body_check2 {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.5rem 1.5rem;
+}

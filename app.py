@@ -424,6 +424,8 @@ def login():
         # Remember which user has logged in
         session["user_id"] = rows[0]["user_id"]
 
+        flash('You are logged in successfully!', 'success')
+
         return redirect("/")
     
     else:
@@ -434,6 +436,10 @@ def login():
 def logout():
     # Forget any user id
     session.clear()
+
+    if 'user_id' in session:
+       flash('You are logged out successfully!', 'success')
+    
     return redirect(url_for("index"))
 
 
@@ -558,6 +564,8 @@ def register():
         user_id = new_user[0]["user_id"]
         session["user_id"] = user_id
 
+        flash('Your have been registered successfully!', 'success')
+
     # Redirect user to homepage (or make an artist profile)
         return redirect("/")
 
@@ -648,7 +656,7 @@ def upload():
             
             # Check if the file extension is allowed
             if not allowed_file(image_file.filename):
-                flash('File type not allowed. Please upload a PNG, JPG, JPEG, GIF, WEBP, or HEIC file.')
+                flash('File type not allowed. Please upload a PNG, JPG, JPEG, GIF, WEBP, or HEIC file.', 'danger')
                 return redirect(request.url)
 
             # Validate the file before saving
